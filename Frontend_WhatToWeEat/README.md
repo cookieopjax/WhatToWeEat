@@ -2,7 +2,15 @@
 
 此專案仍在整理階段
 
-## run this project
+JavaScript Framework : Vue3 (with Composition API)
+
+Build tool : [Vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
+
+Component Library : [Naive Ui](https://www.naiveui.com/zh-CN/os-theme/components)
+
+CSS framework : [Tailwind CSS](https://tailwindcss.com/docs/installation)
+
+## Run this project
 
 ```
 npm install
