@@ -1,4 +1,6 @@
 # WhatToWeEat
 
-## 前端 Vue
-## 後端 未定
+## 初步規劃文件 : https://hackmd.io/KwbqNtBpS5-bxThSkn-jsg
+前端 : Vue
+
+後端 : Python
