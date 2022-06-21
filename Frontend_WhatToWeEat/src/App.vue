@@ -11,7 +11,7 @@ import RegisterPage from './components/RegisterPage.vue';
 
 <template>
   <div class="h-screen bg-red-50">
-    <RegisterPage/>
+    <LoginPage/>
   </div>
 
   

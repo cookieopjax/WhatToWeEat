@@ -3,11 +3,13 @@
   import { NButton, NInput} from 'naive-ui'
   import { reactive, ref } from 'vue'
 
+  let isError = ref(false); //處理由後端回傳的錯誤(如:"已有此使用者名稱"等)
 
-  let userName = ref("");
-  let password = ref("");
-  let confirmPassword = ref("");
-  let isError = ref(false); //處理由後端回傳的錯誤(如已有此使用者等)
+  let account = reactive({
+    userName : "",
+    password : "",
+    confirmPassword : ""
+  });
 
   let isFocus= reactive([false, false, false]); //三個input框是否有被點擊過
 
@@ -27,27 +29,30 @@
     </h1>
 
     <form class = "w-80 mb-20">
-      <n-input v-model:value="userName" @blur="isFocus[0] = true ;" 
+      <n-input v-model:value="account.userName" @blur="isFocus[0] = true ;" 
       size="large" placeholder="使用者名稱" class="rounded-t-md rounded-b-none" />
       <!-- 有被關注過且字串為空才顯示錯誤資訊 -->
-      <p class="errorMsg"  v-if="isFocus[0]&!userName"> 請填入此欄位 </p>
+      <p class="errorMsg"  v-if="isFocus[0]&!account.userName"> 請填入此欄位 </p>
 
-      <n-input  v-model:value="password" @blur="isFocus[1] = true;"
+      <n-input  v-model:value="account.password" @blur="isFocus[1] = true;"
       type="password" show-password-on="click"
       placeholder="密碼" size="large" class="rounded-none"/>
-      <p class="errorMsg"  v-if="isFocus[1]&!password"> 請填入此欄位 </p>
+      <p class="errorMsg"  v-if="isFocus[1]&!account.password"> 請填入此欄位 </p>
 
-      <n-input  v-model:value="confirmPassword" @blur="isFocus[2] = true;"
+      <n-input  v-model:value="account.confirmPassword" @blur="isFocus[2] = true;"
       v-on:keyup.enter="submitHandler" 
       type="password" show-password-on="click"
       placeholder="確認密碼" size="large" class="rounded-t-none rounded-b-md"/>
-      <p class="errorMsg"  v-if="isFocus[2]&!confirmPassword"> 請填入此欄位 </p>
+      <p class="errorMsg"  v-if="isFocus[2]&!account.confirmPassword"> 請填入此欄位 </p>
 
       <p class = "text-red-600 mt-2.5 " v-if="isError">帳密有誤，請重新輸入 !</p>
-      <n-button  @click="submitHandler"  :disabled="!userName||!password||!confirmPassword"  
+
+      <!-- 檢索account中所有value，只要有一回傳false即diable此button -->
+      <n-button  @click="submitHandler"  :disabled="Object.values(account).some(inforn => !inforn)"  
       type="primary" class="my-4 p-0 bg-green-600 " >
       <p class = "w-80">註冊</p>
       </n-button>
+
       <div class="float-right">已經有帳號了嗎?<a class="underline" href="">登入</a></div>
     </form>
     
