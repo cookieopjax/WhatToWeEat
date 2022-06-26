@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:12.6-alpine
+    ports:
+      - "54320:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - /var/lib/postgresql/data
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5050:5000"
+    command:
+      - poetry
+      - run
+      - flask
+      - run
+      - --host
+      - 0.0.0.0
+    volumes:
+      - ./Backend_WhatToWeEat:/usr/src/app/Backend_WhatToWeEat
+    depends_on:
+      - db
