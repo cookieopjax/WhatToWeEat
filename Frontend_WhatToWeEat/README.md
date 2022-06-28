@@ -1,6 +1,6 @@
 # Vue 3 + Vite
 
-此專案仍在整理階段 (僅RegisterPage.vue可勉強運作)
+此專案仍在整理階段 
 
 JavaScript Framework : Vue3 (with Composition API)
 
