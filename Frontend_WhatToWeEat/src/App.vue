@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <h1> I am the HomePage</h1>
+  <!-- 頁面會在這裡載入 -->
   <router-view></router-view>
   
 

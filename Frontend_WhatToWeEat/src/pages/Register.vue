@@ -14,7 +14,7 @@
   let isFocus= reactive([false, false, false]); //三個input框是否有被點擊過
 
   function submitHandler(){
-    console.log("---requset here---");
+    console.log("---request here---");
   }
 
 
@@ -47,8 +47,8 @@
   
         <p class = "text-red-600 mt-2.5 " v-if="isError">帳密有誤，請重新輸入 !</p>
   
-        <!-- 檢索account中所有value，只要有一回傳false即diable此button -->
-        <n-button  @click="submitHandler"  :disabled="Object.values(account).some(inforn => !inforn)"  
+        <!-- 檢索account中所有value，只要有一回傳false即disable此button -->
+        <n-button  @click="submitHandler"  :disabled="Object.values(account).some(inform => !inform)"  
         type="primary" class="my-4 p-0 bg-green-600 " >
         <p class = "w-80">註冊</p>
         </n-button>
