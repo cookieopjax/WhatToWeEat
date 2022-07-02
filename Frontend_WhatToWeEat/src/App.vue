@@ -6,9 +6,7 @@
 
 <template>
   <!-- 頁面會在這裡載入 -->
-  <router-view></router-view>
-  
-
+  <router-view />
 </template>
 
 <style>
