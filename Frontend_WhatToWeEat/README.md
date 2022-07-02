@@ -16,8 +16,15 @@ CSS framework : [Tailwind CSS](https://tailwindcss.com/docs/installation)
 npm install
 npm run dev
 ```
+
+ESLint
+```
+npx eslint src/**/*.js src/**/*.vue
+```
+
 ## Recommend vscode extension
 
 * Vue 3 Snippets
 * Tailwind CSS IntelliSense
 * PostCSS Language Support
+* ESLint
