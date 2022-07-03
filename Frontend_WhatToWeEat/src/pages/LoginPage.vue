@@ -18,7 +18,7 @@ function submitHandler(){
 </script>
 
 <template>
-  <div class="h-screen bg-red-50">
+  <div class="h-screen bg-main-pink">
     <div class="flex flex-col justify-center items-center  h-screen">
       <img
         src="../assets/icon.png"
