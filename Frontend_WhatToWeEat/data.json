@@ -23,6 +23,18 @@
             "address": "Unless otherwise noted, all content copyright New York University. All rights reserved.",
             "phone": "09878787878",
             "id": 4
+        },
+        {
+            "name": "為溢美",
+            "address": "彰化縣七美鄉八七街",
+            "phone": "09878787878",
+            "id": 5
+        },
+        {
+            "name": "銅錵和牛海鮮鍋物",
+            "address": "台中市南屯區公益路二段 830 號",
+            "phone": "(04) 2258-1135",
+            "id": 6
         }
     ]
 }
