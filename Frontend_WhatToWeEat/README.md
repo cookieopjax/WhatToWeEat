@@ -28,6 +28,8 @@ ESLint
 npx eslint src/**/*.js src/**/*.vue
 ```
 
+About RWD breakpoint
+
 ## Recommend vscode extension
 
 * Vue 3 Snippets

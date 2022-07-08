@@ -21,7 +21,8 @@ onMounted(() => {
     <n-grid
       x-gap="12"
       y-gap="10"
-      cols="380:1 450:2 600:3 900:4"
+      cols="1 s:2 m:3 l:4 "
+	    responsive="screen"
     >
       <n-gi 
         v-for="item in restaurantData.value" 
