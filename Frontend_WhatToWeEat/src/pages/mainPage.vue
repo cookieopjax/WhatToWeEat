@@ -7,7 +7,7 @@ import RestaurantPick from '../components/RestaurantPick.vue';
 
 <template>
   <NavBar />
-  <RestaurantPick/>
+  <RestaurantPick />
   <RestaurantList />
 </template>
   

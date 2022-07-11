@@ -9,7 +9,7 @@ let restaurantData = reactive({value:[]});
 onMounted(() => {
 	axios.get(url).then((res) => {	
 		restaurantData.value = res.data;
-		console.log(restaurantData.value);
+		//console.log(restaurantData.value);
 	}
 	);
 });
@@ -22,7 +22,7 @@ onMounted(() => {
       x-gap="12"
       y-gap="10"
       cols="1 s:2 m:3 l:4 "
-	    responsive="screen"
+      responsive="screen"
     >
       <n-gi 
         v-for="item in restaurantData.value" 
