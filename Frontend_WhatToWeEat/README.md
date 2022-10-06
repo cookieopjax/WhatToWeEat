@@ -17,10 +17,17 @@ npm install
 npm run dev
 ```
 
+run the test database
+```
+npm i -g json-server
+json-server -p 4000 data.json
+```
+
 ESLint
 ```
 npx eslint src/**/*.js src/**/*.vue
 ```
+
 
 ## Recommend vscode extension
 
