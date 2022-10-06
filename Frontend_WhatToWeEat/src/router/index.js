@@ -1,12 +1,12 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import LoginPage from '../pages/LoginPage.vue';
-import RegisterPage from '../pages/RegisterPage.vue';
-import mainPage from '../pages/mainPage.vue';
+import { createRouter, createWebHashHistory } from "vue-router";
+import LoginPage from "../pages/LoginPage.vue";
+import RegisterPage from "../pages/RegisterPage.vue";
+import mainPage from "../pages/mainPage.vue";
 
 const routes = [
-	{ path: '/', component: mainPage },
-	{ path: '/login', component: LoginPage },
-	{ path: '/register', component: RegisterPage },
+	{ path: "/", component: mainPage },
+	{ path: "/login", component: LoginPage },
+	{ path: "/register", component: RegisterPage },
 ];
 
 const router = createRouter({

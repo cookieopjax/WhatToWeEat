@@ -1,14 +1,11 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: [
-		'./index.html',
-		'./src/**/*.{vue,js,ts,jsx,tsx}',
-	],
+	content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
 			colors: {
-				'main-pink': 'rgb(254 242 242)', //main color of this website
+				"bg-default": "rgb(254 242 242)", //main color of this website
 			},
 		},
 	},

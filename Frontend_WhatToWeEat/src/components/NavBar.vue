@@ -1,9 +1,7 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-  <div class="bg-main-pink drop-shadow-md">
+  <div class="bg-bg-default drop-shadow-md">
     <div class="flex p-2 items-center">
       <img
         src="../assets/icon.png"
@@ -13,6 +11,6 @@
       <h1 class="text-xl ml-2">
         今天吃什麼
       </h1>
-    </div>   
+    </div>
   </div>
 </template>
