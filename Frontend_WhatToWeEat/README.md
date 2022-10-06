@@ -1,6 +1,6 @@
 # Vue 3 + Vite
 
-此專案仍在整理階段
+此專案仍在整理階段 
 
 JavaScript Framework : Vue3 (with Composition API)
 
@@ -16,3 +16,15 @@ CSS framework : [Tailwind CSS](https://tailwindcss.com/docs/installation)
 npm install
 npm run dev
 ```
+
+ESLint
+```
+npx eslint src/**/*.js src/**/*.vue
+```
+
+## Recommend vscode extension
+
+* Vue 3 Snippets
+* Tailwind CSS IntelliSense
+* PostCSS Language Support
+* ESLint
