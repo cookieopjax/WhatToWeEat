@@ -33,4 +33,12 @@
 * recommendRestaurant : 使用者傳位置，由後端實作一些商業邏輯，如依據他過去喜愛吃的類型又或是近期吃的類型，推薦他一些未加入的餐廳去做加入，這一筆推薦清單回傳前端
 * getTodayEat優化 : 相比上面增加更多商業邏輯 
 
+## backend
+## Pre-request
+- Docker
 
+## Project Setup 
+```
+% make setup-db
+% docker compose up
+```
