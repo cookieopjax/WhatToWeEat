@@ -91,8 +91,4 @@ function submitHandler() {
   </div>
 </template>
 
-<style scoped>
-.errorMsg {
-	@apply text-xs text-red-600 mb-2;
-}
-</style>
+<style scoped></style>

@@ -5,7 +5,10 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				"bg-default": "rgb(254 242 242)", //main color of this website
+				"bg-default": "rgb(254 242 242)", // 統一背景顏色
+			},
+			width: {
+				"w-main": "1000px", // 主畫面內容固定寬度
 			},
 		},
 	},
