@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useStore = defineStore('storeId', {
+export const useStore = defineStore("storeId", {
 	//用arrow function 有完整類型推斷
 	state: () => {
 		return {

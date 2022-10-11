@@ -1,26 +1,24 @@
 <script setup>
-import { NButton , NCard } from 'naive-ui';
-import { reactive, ref } from 'vue';
-import axios from 'axios';
+import { NButton, NCard } from "naive-ui";
+import { reactive, ref } from "vue";
+import axios from "axios";
 
 // isPick : false:按鈕狀態 true顯示餐廳資訊
 let isPick = ref(false);
-let url = 'http://localhost:4000/getRestaurant';
-let restaurantData = reactive({value:[]});
+let url = "http://localhost:4000/getRestaurant";
+let restaurantData = reactive({ value: [] });
 
-function submitHandler(){
-	axios.get(url).then((res) => {	
+function submitHandler() {
+	axios.get(url).then((res) => {
 		restaurantData.value = res.data;
 		isPick.value = true;
-	}
-	);
+	});
 }
-
 </script>
 
 <template>
-  <div class="MainPage-margin h-36 flex flex-col justify-center items-center">
-    <n-button 
+  <div class="h-36 flex flex-col justify-center items-center">
+    <n-button
       v-if="!isPick"
       size="large"
       type="primary"
@@ -31,7 +29,7 @@ function submitHandler(){
     </n-button>
     <n-card
       v-else
-      class="h-36 "
+      class="h-36"
       :title="restaurantData.value[0].name"
       embedded
       :bordered="false"
@@ -42,9 +40,4 @@ function submitHandler(){
   </div>
 </template>
 
-<style scoped>
-  .MainPage-margin{
-    @apply mx-4 md:mx-6 lg:mx-8 xl:mx-12 2xl:mx-16 my-4
-  }
-
-</style>
+<style scoped></style>

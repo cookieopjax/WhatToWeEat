@@ -1,18 +1,18 @@
 <script setup>
-import { NButton, NInput } from 'naive-ui';
-import { reactive, ref } from 'vue';
+import { NButton, NInput } from "naive-ui";
+import { reactive, ref } from "vue";
 
 let isError = ref(false);
 
 let account = reactive({
-	userName: '',
-	password: '',
+	userName: "",
+	password: "",
 });
 
 let isFocus = reactive([false, false]); //三個input框是否有被點擊過
 
 function submitHandler() {
-	console.log('---request here---');
+	console.log("---request here---");
 }
 </script>
 
