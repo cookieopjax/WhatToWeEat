@@ -39,11 +39,12 @@ npx eslint src/**/*.js src/**/*.vue
 
 ---
 
-# For developer
-
 ## Project common style
 
-please check
+Please check
 
 1. customize/all.scss
 2. tailwind.config
+
+common color we use prefix "wte" (What To we Eat)
+![](https://upload.cc/i1/2022/10/12/c45AzH.png)

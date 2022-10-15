@@ -1,26 +1,8 @@
-<script setup>
-import { NButton, NInput } from "naive-ui";
-import { reactive, ref } from "vue";
-
-let isError = ref(false);
-
-let account = reactive({
-	userName: "",
-	password: "",
-});
-
-let isFocus = reactive([false, false]); //三個input框是否有被點擊過
-
-function submitHandler() {
-	console.log("---request here---");
-}
-</script>
-
 <template>
-  <div class="h-screen bg-main-pink">
+  <div class="h-screen bg-wte-bg">
     <div class="flex flex-col justify-center items-center h-screen">
       <img
-        src="../assets/icon.png"
+        src="@/assets/icon.png"
         alt=""
         class="w-32"
       >
@@ -37,12 +19,12 @@ function submitHandler() {
           @blur="isFocus[0] = true"
         />
         <!-- 有被關注過且字串為空才顯示錯誤資訊 -->
-        <p
+        <div
           v-if="isFocus[0] & !account.userName"
           class="errorMsg"
         >
           請填入此欄位
-        </p>
+        </div>
 
         <n-input
           v-model:value="account.password"
@@ -54,31 +36,31 @@ function submitHandler() {
           @blur="isFocus[1] = true"
           @keyup.enter="submitHandler"
         />
-        <p
+        <div
           v-if="isFocus[1] & !account.password"
           class="errorMsg"
         >
           請填入此欄位
-        </p>
-
-        <p
-          v-if="isError"
-          class="text-red-600 mt-2.5"
-        >
-          帳密有誤，請重新輸入 !
-        </p>
+        </div>
 
         <!-- 檢索account中所有value，只要有一回傳false即disable此button -->
         <n-button
           :disabled="!account.userName || !account.password"
           type="primary"
-          class="my-4 p-0 bg-green-600"
+          class="my-2 p-0 bg-wte-primary"
           @click="submitHandler"
         >
           <p class="w-80">
             登入
           </p>
         </n-button>
+
+        <div
+          v-if="isError"
+          class="errorMsg"
+        >
+          帳密有誤，請重新輸入 !
+        </div>
 
         <div class="float-right">
           還沒有帳號嗎?<a
@@ -91,8 +73,24 @@ function submitHandler() {
   </div>
 </template>
 
-<style scoped>
-.errorMsg {
-	@apply text-xs text-red-600 mb-2;
+<script setup>
+import { NButton, NInput } from "naive-ui";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+let isError = ref(false);
+
+let account = reactive({
+	userName: "",
+	password: "",
+});
+
+let isFocus = reactive([false, false]); //三個input框是否有被點擊過
+
+function submitHandler() {
+	router.push({ path: "/" });
 }
-</style>
+</script>
+
+<style scoped></style>

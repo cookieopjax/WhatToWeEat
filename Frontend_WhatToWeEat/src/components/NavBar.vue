@@ -3,12 +3,12 @@ import { NPopover } from "naive-ui";
 </script>
 
 <template>
-  <div class="bg-bg-default drop-shadow-md">
+  <nav class="bg-wte-bg drop-shadow-md">
     <div class="flex p-2 items-center">
       <img
-        src="../assets/icon.png"
+        src="@/assets/icon.png"
         alt=""
-        class="h-10 ml-4"
+        class="h-8 ml-4"
       >
       <h1 class="text-xl ml-2">
         今天吃什麼
@@ -19,18 +19,18 @@ import { NPopover } from "naive-ui";
       >
         <template #trigger>
           <img
-            src="../assets/user.png"
+            src="@/assets/user.png"
             alt=""
-            class="h-10 ml-auto"
+            class="h-8 ml-auto"
           >
         </template>
         <div class="w-[200px]">
-          <h1>你好! 餅乾</h1>
-          <h3 class="text-right cursor-pointer underline">
+          <h5>你好! 餅乾</h5>
+          <p class="text-right cursor-pointer underline">
             登出
-          </h3>
+          </p>
         </div>
       </n-popover>
     </div>
-  </div>
+  </nav>
 </template>

@@ -1,27 +1,8 @@
-<script setup>
-import { NButton, NInput } from "naive-ui";
-import { reactive, ref } from "vue";
-
-let isError = ref(false); //處理由後端回傳的錯誤(如:"已有此使用者名稱"等)
-
-let account = reactive({
-	userName: "",
-	password: "",
-	confirmPassword: "",
-});
-
-let isFocus = reactive([false, false, false]); //三個input框是否有被點擊過
-
-function submitHandler() {
-	console.log("---request here---");
-}
-</script>
-
 <template>
-  <div class="h-screen bg-red-50">
+  <div class="h-screen bg-wte-bg">
     <div class="flex flex-col justify-center items-center h-screen">
       <img
-        src="../assets/icon.png"
+        src="@/assets/icon.png"
         alt=""
         class="w-32"
       >
@@ -80,7 +61,7 @@ function submitHandler() {
 
         <p
           v-if="isError"
-          class="text-red-600 mt-2.5"
+          class="text-wte-danger mt-2.5"
         >
           帳密有誤，請重新輸入 !
         </p>
@@ -89,7 +70,7 @@ function submitHandler() {
         <n-button
           :disabled="Object.values(account).some((inform) => !inform)"
           type="primary"
-          class="my-4 p-0 bg-green-600"
+          class="my-4 p-0 bg-wte-primary"
           @click="submitHandler"
         >
           <p class="w-80">
@@ -108,4 +89,25 @@ function submitHandler() {
   </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { NButton, NInput } from "naive-ui";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+let isError = ref(false); //處理由後端回傳的錯誤(如:"已有此使用者名稱"等)
+
+let account = reactive({
+	userName: "",
+	password: "",
+	confirmPassword: "",
+});
+
+let isFocus = reactive([false, false, false]); //三個input框是否有被點擊過
+
+function submitHandler() {
+	router.push({ path: "/login" });
+}
+</script>
+
+<style scoped lang="scss"></style>
