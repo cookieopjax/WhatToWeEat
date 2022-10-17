@@ -41,38 +41,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="flex border">
-       <img
-            src="@/assets/foodEmpty.jpg"
-            alt="food"
-            class="w-32 bg-cover flex-none"
-          > 
-
-        <div class="flex flex-col h-40">
-          <div class="flex-[1_0]">
-            <h4 class="truncate">
-              {{ item.name }}
-            </h4>
-          </div>
-        </div>
-      </div>-->
-
-      <!-- <div class="border h-32 hover:drop-shadow flex">
-          
-          <div class="bg-wte-bg">
-            <h1 class="truncate">
-              {{ item.name }}
-            </h1>
-
-            <p class="">
-              地址 : {{ item.address }}
-            </p>
-            <p class="">
-              電話 : {{ item.phone }}
-            </p>
-          </div>
-        </div> -->
     </n-gi>
   </n-grid>
 </template>
@@ -80,17 +48,22 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import { NGrid, NGi, NButton } from "naive-ui";
-import axios from "axios";
+import { apiGetAllRestaurant } from "@/api/index.js";
 
-let url = import.meta.env.VITE_baseUrl + "allRestaurant";
 let restaurantData = reactive({ value: [] });
 
 onMounted(() => {
-	axios.get(url).then((res) => {
-		restaurantData.value = res.data;
-		console.log(restaurantData.value);
-	});
+	getData();
 });
+
+const getData = async () => {
+	try {
+		const res = await apiGetAllRestaurant();
+		restaurantData.value = res.data;
+	} catch (err) {
+		console.error(err);
+	}
+};
 </script>
 <style scoped>
 .truncate-3 {
