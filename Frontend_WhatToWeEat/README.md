@@ -43,7 +43,7 @@ npx eslint src/**/*.js src/**/*.vue
 
 Please check
 
-1. customize/all.scss
+1. src/index.css
 2. tailwind.config
 
 common color we use prefix "wte" (What To we Eat)

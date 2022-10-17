@@ -34,19 +34,25 @@
 <script setup>
 import { NButton } from "naive-ui";
 import { reactive, ref } from "vue";
-import axios from "axios";
+import { apiGetRestaurantPick } from "@/api/index.js";
 
 // isPick : false:按鈕狀態 true顯示餐廳資訊
 let isPick = ref(false);
-let url = import.meta.env.VITE_baseUrl + "getRestaurant";
 let restaurantData = reactive({ value: [] });
 
 function submitHandler() {
-	axios.get(url).then((res) => {
+	getData();
+}
+
+const getData = async () => {
+	try {
+		const res = await apiGetRestaurantPick();
 		restaurantData.value = res.data;
 		isPick.value = true;
-	});
-}
+	} catch (err) {
+		console.error(err);
+	}
+};
 </script>
 
 <style scoped></style>
