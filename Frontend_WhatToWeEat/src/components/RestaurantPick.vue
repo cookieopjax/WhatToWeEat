@@ -34,7 +34,7 @@
 <script setup>
 import { NButton } from "naive-ui";
 import { reactive, ref } from "vue";
-import { apiGetRestaurantPick } from "@/api/index.js";
+import { apiGetRestaurantPick } from "@/api";
 
 // isPick : false:按鈕狀態 true顯示餐廳資訊
 let isPick = ref(false);
