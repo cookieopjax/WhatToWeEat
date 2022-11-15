@@ -48,7 +48,7 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import { NGrid, NGi, NButton } from "naive-ui";
-import { apiGetAllRestaurant } from "@/api/index.js";
+import { apiGetAllRestaurant } from "@/api";
 
 let restaurantData = reactive({ value: [] });
 
