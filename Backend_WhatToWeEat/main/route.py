@@ -2,14 +2,12 @@ from main import app, db
 from main.model import User
 import os
 from flask import request, jsonify 
-
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
-from flask_jwt_extended import JWTManager
 
 @app.route("/")
-def hello_world():
+def server_status_check():
     return jsonify(status = "server is running !"), 200
 
 
@@ -23,7 +21,7 @@ def register():
     isRepeatPassword = User.query.filter_by(password = password).first()
 
     # 重複的用戶名稱或密碼
-    if isRepeatUsername and isRepeatPassword:
+    if isRepeatUsername or isRepeatPassword:
         return jsonify(status = "This username is already registered"), 409
 
     user = User(username, password)
@@ -50,7 +48,7 @@ def login():
     if not (isRepeatUsername and isRepeatPassword):
         return jsonify(status = "login failed"), 400
 
-    # 製作jwt token
+    # 製作jwt token，以username作為辨識
     access_token = create_access_token(username)
     return jsonify(access_token=access_token)
 
