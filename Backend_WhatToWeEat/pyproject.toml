@@ -8,6 +8,8 @@ authors = ["Ray Chen <26718787+hedgeruei@users.noreply.github.com>"]
 python = "^3.8"
 Flask = "^2.1.2"
 flask-sqlalchemy = "^3.0.2"
+flask-bcrypt = "^1.0.1"
+flask-jwt-extended = "^4.4.4"
 
 [tool.poetry.dev-dependencies]
 
