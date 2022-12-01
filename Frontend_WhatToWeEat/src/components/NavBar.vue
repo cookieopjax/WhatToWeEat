@@ -1,5 +1,16 @@
 <script setup>
 import { NPopover } from "naive-ui";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const props = defineProps({
+	userName: { type: String, default: "" },
+});
+
+function logoutHandler() {
+	localStorage.setItem("access_token", "");
+	router.push({ path: "/login" });
+}
 </script>
 
 <template>
@@ -25,8 +36,11 @@ import { NPopover } from "naive-ui";
           >
         </template>
         <div class="w-[200px]">
-          <h5>你好! 餅乾</h5>
-          <p class="text-right cursor-pointer underline">
+          <h5>你好! {{ props.userName }}</h5>
+          <p
+            class="text-right cursor-pointer underline"
+            @click="logoutHandler()"
+          >
             登出
           </p>
         </div>
