@@ -77,6 +77,8 @@
 import { NButton, NInput } from "naive-ui";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { apiLogin } from "@/api";
+
 const router = useRouter();
 
 let isError = ref(false);
@@ -89,8 +91,28 @@ let account = reactive({
 let isFocus = reactive([false, false]); //三個input框是否有被點擊過
 
 function submitHandler() {
-	router.push({ path: "/" });
+	userLogin();
 }
+
+const userLogin = async () => {
+	try {
+		const res = await apiLogin({
+			username: account.userName,
+			password: account.password,
+		});
+		localStorage.setItem("access_token", res.data.access_token);
+		router.push({ path: "/" });
+	} catch (err) {
+		//帳密錯誤
+		if (err.response.status === 401) {
+			isError.value = true;
+			return;
+		}
+
+		//其他非預期的錯誤
+		console.error(err);
+	}
+};
 </script>
 
 <style scoped></style>

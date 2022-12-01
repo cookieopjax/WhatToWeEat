@@ -8,7 +8,7 @@ from flask_jwt_extended import jwt_required
 
 @app.route("/")
 def server_status_check():
-    return jsonify(status = "server is running !"), 200
+    return jsonify(msg = "server is running !"), 200
 
 
 @app.route("/register", methods=["POST"])
@@ -22,12 +22,12 @@ def register():
 
     # 重複的用戶名稱或密碼
     if isRepeatUsername or isRepeatPassword:
-        return jsonify(status = "This username is already registered"), 409
+        return jsonify(msg = "This username is already registered"), 409
 
     user = User(username, password)
     db.session.add(user)
     db.session.commit()
-    return jsonify(status = "register success"), 200
+    return jsonify(msg = "register success"), 200
 
 
 @app.route("/authentication", methods=["GET"])
@@ -46,7 +46,7 @@ def login():
     isRepeatPassword = User.query.filter_by(password = password).first()
 
     if not (isRepeatUsername and isRepeatPassword):
-        return jsonify(status = "login failed"), 400
+        return jsonify(msg = "login failed"), 401
 
     # 製作jwt token，以username作為辨識
     access_token = create_access_token(username)

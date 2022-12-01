@@ -93,6 +93,8 @@
 import { NButton, NInput } from "naive-ui";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { apiRegister } from "@/api";
+
 const router = useRouter();
 
 let isError = ref(false); //處理由後端回傳的錯誤(如:"已有此使用者名稱"等)
@@ -106,8 +108,28 @@ let account = reactive({
 let isFocus = reactive([false, false, false]); //三個input框是否有被點擊過
 
 function submitHandler() {
-	router.push({ path: "/login" });
+	userRegister();
+	//router.push({ path: "/login" });
 }
+
+const userRegister = async () => {
+	try {
+		const res = await apiRegister({
+			username: account.userName,
+			password: account.password,
+		});
+		router.push({ path: "/login" });
+	} catch (err) {
+		//帳密重複
+		if (err.response.status === 409) {
+			isError.value = true;
+			return;
+		}
+
+		//其他非預期的錯誤
+		console.error(err);
+	}
+};
 </script>
 
 <style scoped lang="scss"></style>
