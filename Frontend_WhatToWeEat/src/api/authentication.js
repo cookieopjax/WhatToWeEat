@@ -5,10 +5,14 @@ const restaurantRequest = axios.create({
 });
 
 const authRequest = axios.create({
-	headers: {
-		Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-	},
 	baseURL: import.meta.env.VITE_baseUrl,
+});
+
+authRequest.interceptors.request.use(function (config) {
+	config.headers["Authorization"] = `Bearer ${localStorage.getItem(
+		"access_token"
+	)}`;
+	return config;
 });
 
 export const register = (data) => restaurantRequest.post("/register", data);
