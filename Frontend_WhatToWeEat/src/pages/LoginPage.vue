@@ -63,10 +63,11 @@
         </div>
 
         <div class="float-right">
-          還沒有帳號嗎?<a
-            class="underline"
+          還沒有帳號嗎?<span
+            class="underline cursor-pointer"
             href=""
-          >註冊</a>
+            @click="registerClick()"
+          >註冊</span>
         </div>
       </form>
     </div>
@@ -113,6 +114,10 @@ const userLogin = async () => {
 		console.error(err);
 	}
 };
+
+function registerClick() {
+	router.push({ path: "/register" });
+}
 </script>
 
 <style scoped></style>
