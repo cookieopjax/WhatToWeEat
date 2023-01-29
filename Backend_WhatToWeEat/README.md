@@ -11,10 +11,6 @@ poetry install
 
 ## Project Run
 ```
-make backend-run
-```
-or 
-```
 poetry run flask run
 ```
 

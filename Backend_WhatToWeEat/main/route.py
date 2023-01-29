@@ -18,10 +18,9 @@ def register():
 
     # 帳密是否存在
     isRepeatUsername = User.query.filter_by(username = username).first()
-    isRepeatPassword = User.query.filter_by(password = password).first()
 
-    # 重複的用戶名稱或密碼
-    if isRepeatUsername or isRepeatPassword:
+    # 重複的用戶名稱
+    if isRepeatUsername :
         return jsonify(msg = "This username is already registered"), 409
 
     user = User(username, password)

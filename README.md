@@ -4,9 +4,12 @@
 
 # 今天吃什麼 WhatToWeEat
 
-前端 : Vue
+https://what-to-we-eat.vercel.app/
 
-後端 : Flask
+
+前端 : Vue (部屬:vercel)
+
+後端 : Flask (部屬:未定)
 
 使用者可以註冊自己的帳號，手動加入餐廳或者用google map去選
 
