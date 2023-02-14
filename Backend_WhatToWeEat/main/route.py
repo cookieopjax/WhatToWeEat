@@ -15,13 +15,13 @@ def server_status_check():
 @app.route("/restaurant", methods=["POST"])
 @jwt_required()
 def postRestaurant():
-    username = request.json.get("username")
+    current_user = get_jwt_identity()
     restaurantName = request.json.get("name")
     restaurantPhone = request.json.get("phone")
     restaurantAddress = request.json.get("address");
     restaurantImage = request.json.get("image");
     
-    restaurantData = Restaurant(username, restaurantName, restaurantPhone, restaurantAddress, restaurantImage);
+    restaurantData = Restaurant(current_user, restaurantName, restaurantPhone, restaurantAddress, restaurantImage);
     db.session.add(restaurantData)
     db.session.commit()
     return jsonify(msg = "restaurant add success"), 200
@@ -45,6 +45,18 @@ def getRestaurant():
 
     return jsonify(restaurantList), 200
 
+# 取得使用者的所有餐廳
+@app.route("/pick_restaurant", methods=["GET"])
+@jwt_required()
+def pickRestaurant():
+    current_user = get_jwt_identity()
+    tempRestaurant = {
+        'name' : '銅錵和牛海鮮鍋物',
+        'phone': '(04) 2258-1135',
+        'address': '台中市南屯區公益路二段 830 號',
+        'image' : ''
+    }
+    return jsonify(tempRestaurant), 200
 
 @app.route("/register", methods=["POST"])
 def register():

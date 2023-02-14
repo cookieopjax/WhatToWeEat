@@ -6,7 +6,7 @@
     responsive="screen"
   >
     <n-gi
-      v-for="item in restaurantData.value"
+      v-for="item in store.restaurantList"
       :key="item.id"
     >
       <div class="border flex">
@@ -46,30 +46,20 @@
 </template>
 
 <script setup>
-import { reactive, onMounted } from "vue";
+import { onBeforeMount } from "vue";
 import { NGrid, NGi, NButton } from "naive-ui";
-import { apiGetAllRestaurant } from "@/api";
+import { useStore } from "../store/main";
+const store = useStore();
 
-let restaurantData = reactive({ value: [] });
-
-onMounted(() => {
-	getData();
+onBeforeMount(() => {
+  store.getRestaurantData();
 });
-
-const getData = async () => {
-	try {
-		const res = await apiGetAllRestaurant();
-		restaurantData.value = res.data;
-	} catch (err) {
-		console.error(err);
-	}
-};
 </script>
 <style scoped>
 .truncate-3 {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
-	overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 </style>

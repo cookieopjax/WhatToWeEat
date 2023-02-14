@@ -4,12 +4,12 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const props = defineProps({
-	userName: { type: String, default: "" },
+  userName: { type: String, default: "" },
 });
 
 function logoutHandler() {
-	localStorage.setItem("access_token", "");
-	router.push({ path: "/login" });
+  localStorage.setItem("access_token", "");
+  router.push({ path: "/login" });
 }
 </script>
 
@@ -25,7 +25,7 @@ function logoutHandler() {
         今天吃什麼
       </h1>
       <n-popover
-        trigger="hover"
+        trigger="click"
         :show-arrow="false"
       >
         <template #trigger>
