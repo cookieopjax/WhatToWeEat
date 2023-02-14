@@ -1,5 +1,6 @@
 from main import app, db
 from main.model import User
+from main.model import Restaurant
 import os
 from flask import request, jsonify 
 from flask_jwt_extended import create_access_token
@@ -9,6 +10,40 @@ from flask_jwt_extended import jwt_required
 @app.route("/")
 def server_status_check():
     return jsonify(msg = "server is running !"), 200
+
+# 新增一筆餐廳
+@app.route("/restaurant", methods=["POST"])
+@jwt_required()
+def postRestaurant():
+    username = request.json.get("username")
+    restaurantName = request.json.get("name")
+    restaurantPhone = request.json.get("phone")
+    restaurantAddress = request.json.get("address");
+    restaurantImage = request.json.get("image");
+    
+    restaurantData = Restaurant(username, restaurantName, restaurantPhone, restaurantAddress, restaurantImage);
+    db.session.add(restaurantData)
+    db.session.commit()
+    return jsonify(msg = "restaurant add success"), 200
+
+# 取得使用者的所有餐廳
+@app.route("/restaurant", methods=["GET"])
+@jwt_required()
+def getRestaurant():
+    current_user = get_jwt_identity()
+    
+    rawRestaurant = Restaurant.query.filter_by(username=current_user).all()
+    restaurantList = []
+    for item in rawRestaurant:
+        tempRestaurant = {
+            'name' : item.name,
+            'phone': item.phone,
+            'address': item.address,
+            'image' : item.image
+        }
+        restaurantList.append(tempRestaurant)
+
+    return jsonify(restaurantList), 200
 
 
 @app.route("/register", methods=["POST"])
