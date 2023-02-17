@@ -25,7 +25,7 @@ app.debug = True
 
 jwt.init_app(app)
 
-JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=30)
+JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=100)
 
 # # initialize the app with the extension
 # db.init_app(app)

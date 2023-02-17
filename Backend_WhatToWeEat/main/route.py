@@ -36,6 +36,7 @@ def getRestaurant():
     restaurantList = []
     for item in rawRestaurant:
         tempRestaurant = {
+            'id' : item.id,
             'name' : item.name,
             'phone': item.phone,
             'address': item.address,
@@ -45,11 +46,28 @@ def getRestaurant():
 
     return jsonify(restaurantList), 200
 
-# 取得使用者的所有餐廳
+# 更新使用者餐廳
+@app.route("/restaurant", methods=["PUT"])
+@jwt_required()
+def updateRestaurant():
+    current_user = get_jwt_identity()
+    restaurantId = request.json.get("id")
+    thisRestaurant = Restaurant.query.filter_by(id=restaurantId).first()
+    if thisRestaurant.username != current_user:
+        return jsonify(msg = "unauthorized data access"), 403
+
+    thisRestaurant.name = request.json.get("name")
+    thisRestaurant.address = request.json.get("address")
+    thisRestaurant.phone = request.json.get("phone")
+
+    db.session.commit()
+    return jsonify(msg = "data is update successfully"), 200
+    
+# 取得使用者當日餐廳
 @app.route("/pick_restaurant", methods=["GET"])
 @jwt_required()
 def pickRestaurant():
-    current_user = get_jwt_identity()
+    #current_user = get_jwt_identity()
     tempRestaurant = {
         'name' : '銅錵和牛海鮮鍋物',
         'phone': '(04) 2258-1135',
@@ -74,7 +92,6 @@ def register():
     db.session.add(user)
     db.session.commit()
     return jsonify(msg = "register success"), 200
-
 
 @app.route("/authentication", methods=["GET"])
 @jwt_required()
