@@ -21,8 +21,6 @@ db = SQLAlchemy(app)
 
 CORS(app)
 
-app.debug = True 
-
 jwt.init_app(app)
 
 JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=100)

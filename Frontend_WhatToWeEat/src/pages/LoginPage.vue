@@ -85,38 +85,38 @@ const router = useRouter();
 let isError = ref(false);
 
 let account = reactive({
-	userName: "",
-	password: "",
+  userName: "aaa", //預設帳密方便開發用
+  password: "000",
 });
 
 let isFocus = reactive([false, false]); //三個input框是否有被點擊過
 
 function submitHandler() {
-	userLogin();
+  userLogin();
 }
 
 const userLogin = async () => {
-	try {
-		const res = await apiLogin({
-			username: account.userName,
-			password: account.password,
-		});
-		localStorage.setItem("access_token", res.data.access_token);
-		router.push({ path: "/" });
-	} catch (err) {
-		//帳密錯誤
-		if (err.response.status === 401) {
-			isError.value = true;
-			return;
-		}
+  try {
+    const res = await apiLogin({
+      username: account.userName,
+      password: account.password,
+    });
+    localStorage.setItem("access_token", res.data.access_token);
+    router.push({ path: "/" });
+  } catch (err) {
+    //帳密錯誤
+    if (err.response.status === 401) {
+      isError.value = true;
+      return;
+    }
 
-		//其他非預期的錯誤
-		console.error(err);
-	}
+    //其他非預期的錯誤
+    console.error(err);
+  }
 };
 
 function registerClick() {
-	router.push({ path: "/register" });
+  router.push({ path: "/register" });
 }
 </script>
 

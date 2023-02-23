@@ -6,6 +6,7 @@ from flask import request, jsonify
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+import random
 
 @app.route("/")
 def server_status_check():
@@ -67,14 +68,21 @@ def updateRestaurant():
 @app.route("/pick_restaurant", methods=["GET"])
 @jwt_required()
 def pickRestaurant():
-    #current_user = get_jwt_identity()
-    tempRestaurant = {
-        'name' : '銅錵和牛海鮮鍋物',
-        'phone': '(04) 2258-1135',
-        'address': '台中市南屯區公益路二段 830 號',
-        'image' : ''
-    }
-    return jsonify(tempRestaurant), 200
+    current_user = get_jwt_identity()
+    
+    rawRestaurant = Restaurant.query.filter_by(username=current_user).all()
+    restaurantList = []
+    for item in rawRestaurant:
+        tempRestaurant = {
+            'id' : item.id,
+            'name' : item.name,
+            'phone': item.phone,
+            'address': item.address,
+            'image' : item.image
+        }
+        restaurantList.append(tempRestaurant)
+    index = random.randint(0, len(restaurantList) - 1)
+    return jsonify(restaurantList[index]), 200
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -100,7 +108,6 @@ def protected():
     current_user = get_jwt_identity()
     return jsonify(username=current_user), 200
 
-
 @app.route("/login", methods=["POST"])
 def login():
     username = request.json.get("username")
@@ -114,7 +121,6 @@ def login():
     # 製作jwt token，以username作為辨識
     access_token = create_access_token(username)
     return jsonify(access_token=access_token)
-
 
 # 寫完資料Model後，進入這個route，更新.db檔案 (僅為初期開發方便使用)
 @app.route("/update_db")

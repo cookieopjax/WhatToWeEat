@@ -11,7 +11,7 @@ poetry install
 
 ## Project Run
 ```
-poetry run flask run
+poetry run python app.py
 ```
 
 ## Database
