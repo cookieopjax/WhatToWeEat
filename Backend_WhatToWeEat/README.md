@@ -1,37 +1,31 @@
 # 今天吃什麼 後端
 
-## Pre-install
-- Poetry
-    - poetry config virtualenvs.in-project true
+## Run this project
 
-## Project Setup
 ```
-poetry install
-```
-
-## Project Run
-```
-poetry run python app.py
+npm install
+npm run backend
 ```
 
 ## Database
 - SQLite 
-- flask_sqlalchemy
-
+- Sequelize
 
 ## 專案架構
-目前的專案架構可能不是最好的，歡迎更動
+專案架構皆為手動配置，有更好優化的可以提出
 ```
-instance/
-    project.db # 資料庫
-main/
-    __init__.py # 初始化
-    model.py # 資料庫Model
-    route.py # 路由設置
-app.py   #Flask進入點
+app/
+|-- controllers/
+|   |-- userController.js
+|-- models/
+|   |-- user.js
+|-- routes/
+|   |-- userRoutes.js
+|-- utils/
+|   |-- database.js
+|-- app.js
 ```
-
-### 更動資料庫
-1. 改model.py檔案內容
-2. 重啟flask服務
-3. 進入/update_db路由 
+app.js會去引入database和route
+database.js去連結資料庫，呼叫model建立table
+route包含路由，觸發到某一路由時，呼叫controller的function，在該controller裡send data
+model內有function存取資料庫資料，並給controller用 
