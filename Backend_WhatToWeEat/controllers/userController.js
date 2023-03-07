@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
 const { User } = require("../models");
+const { generateJwt } = require("../utils/jwt");
 
 exports.login = async (req, res) => {
   try {
@@ -18,15 +18,15 @@ exports.login = async (req, res) => {
     }
 
     //正確，發出token
-    const token = jwt.sign({ username }, "test_token_should_replace_by_env");
+    const token = generateJwt({ username });
     res.status(200).json({ token });
   } catch (error) {
-    console.error(error);
     res.status(500).send("Server error");
+    console.error(error);
   }
 };
 
-exports.createUser = async (req, res) => {
+exports.register = async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.create({ username, password });
@@ -39,5 +39,6 @@ exports.createUser = async (req, res) => {
       return;
     }
     res.status(500).send("Server error");
+    console.error(error);
   }
 };

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { createUser, login } = require("../controllers/userController");
+const { register, login } = require("../controllers/userController");
 
 /**
  * @swagger
@@ -27,8 +27,10 @@ const { createUser, login } = require("../controllers/userController");
  *     responses:
  *       200:
  *         description: New user name
+ *       409:
+ *         description: The username is already taken
  */
-router.post("/user", createUser);
+router.post("/user", register);
 
 /**
  * @swagger
@@ -55,6 +57,10 @@ router.post("/user", createUser);
  *     responses:
  *       200:
  *         description: JWT
+ *       404:
+ *         description: User not found
+ *       401:
+ *         description: Incorrect password.
  */
 router.post("/login", login);
 
