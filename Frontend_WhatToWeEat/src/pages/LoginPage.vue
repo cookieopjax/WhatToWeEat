@@ -85,8 +85,8 @@ const router = useRouter();
 let isError = ref(false);
 
 let account = reactive({
-  userName: "aaa", //預設帳密方便開發用
-  password: "000",
+  userName: "", //預設帳密方便開發用
+  password: "",
 });
 
 let isFocus = reactive([false, false]); //三個input框是否有被點擊過
