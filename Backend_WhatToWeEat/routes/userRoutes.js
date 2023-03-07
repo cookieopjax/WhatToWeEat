@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const { register, login } = require("../controllers/userController");
+const {
+  register,
+  login,
+  authentication,
+} = require("../controllers/userController");
 
 /**
  * @swagger
- * /api/user:
+ * /api/register:
  *   post:
  *     summary: Create a new user
  *     tags:
@@ -30,13 +34,13 @@ const { register, login } = require("../controllers/userController");
  *       409:
  *         description: The username is already taken
  */
-router.post("/user", register);
+router.post("/register", register);
 
 /**
  * @swagger
  * /api/login:
  *   post:
- *     summary: Login
+ *     summary: Login to get token
  *     tags:
  *      - Users
  *     description: Login to get jwt
@@ -63,5 +67,21 @@ router.post("/user", register);
  *         description: Incorrect password.
  */
 router.post("/login", login);
+
+/**
+ * @swagger
+ * /api/authentication:
+ *   get:
+ *     summary: Verify authorization and identity
+ *     tags:
+ *      - Users
+ *     description: check your jwt
+ *     responses:
+ *       200:
+ *         description: return username
+ *       401:
+ *         description: Unauthorized
+ */
+router.get("/authentication", authentication);
 
 module.exports = router;

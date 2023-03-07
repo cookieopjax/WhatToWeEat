@@ -31,7 +31,7 @@ exports.getUsername = async (req, res) => {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     return decoded.username;
   } catch (err) {
-    console.error("JWT 驗證失敗 ", err);
+    //console.error("JWT 驗證失敗 ", err);
     return res.status(401).json({ message: "Unauthorized!" });
   }
 };

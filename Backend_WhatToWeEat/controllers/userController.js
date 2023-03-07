@@ -1,5 +1,5 @@
 const { User } = require("../models");
-const { generateJwt } = require("../utils/jwt");
+const { generateJwt, getUsername } = require("../utils/jwt");
 
 exports.login = async (req, res) => {
   try {
@@ -38,6 +38,16 @@ exports.register = async (req, res) => {
         .send("The username is already taken. Please choose another one.");
       return;
     }
+    res.status(500).send("Server error");
+    console.error(error);
+  }
+};
+
+exports.authentication = async (req, res) => {
+  try {
+    let username = await getUsername(req, res);
+    res.status(200).json({ username });
+  } catch (error) {
     res.status(500).send("Server error");
     console.error(error);
   }

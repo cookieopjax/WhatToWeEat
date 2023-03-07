@@ -11,8 +11,6 @@ https://what-to-we-eat.vercel.app/
 
 後端 : Express
 
-Node.js版本全部都為 v18.13.0
-
 使用者可以註冊自己的帳號，手動加入餐廳或者用google map去選
 
 後端會儲存使用者加入的餐廳

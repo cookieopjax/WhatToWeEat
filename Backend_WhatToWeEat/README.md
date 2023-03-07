@@ -1,5 +1,10 @@
 # 今天吃什麼 後端
 
+## Pre-install
+```
+Node.js v18.13.0
+```
+
 ## Run this project
 
 ```

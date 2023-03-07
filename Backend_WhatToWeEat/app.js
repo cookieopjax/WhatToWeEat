@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const swaggerUi = require("swagger-ui-express"); //產生swagger ui介面
 const userRoutes = require("./routes/userRoutes"); // 引入userRoutes.js路由文件
 const restaurantRoutes = require("./routes/restaurantRoutes"); // 引入userRoutes.js路由文件
@@ -7,6 +8,8 @@ const { User, Restaurant } = require("./models"); //建立表
 require("dotenv").config();
 
 const app = express();
+
+app.use(cors()); //暫時開發用，允許全部
 
 //進行資料庫更新
 sequelize.sync();
