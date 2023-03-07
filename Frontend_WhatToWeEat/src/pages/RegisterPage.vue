@@ -81,7 +81,7 @@
         <div class="float-right">
           已經有帳號了嗎?<a
             class="underline"
-            href=""
+            href="/login"
           >登入</a>
         </div>
       </form>
