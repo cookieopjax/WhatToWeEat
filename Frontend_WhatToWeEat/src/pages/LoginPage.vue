@@ -101,11 +101,11 @@ const userLogin = async () => {
       username: account.userName,
       password: account.password,
     });
-    localStorage.setItem("access_token", res.data.access_token);
+    localStorage.setItem("access_token", res.data.token);
     router.push({ path: "/" });
   } catch (err) {
     //帳密錯誤
-    if (err.response.status === 401) {
+    if (err.response.status === 401 ||err.response.status === 404) {
       isError.value = true;
       return;
     }

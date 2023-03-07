@@ -9,7 +9,7 @@ https://what-to-we-eat.vercel.app/
 
 前端 : Vue (部屬:vercel)
 
-後端 : Flask (部屬:未定)
+後端 : Express
 
 使用者可以註冊自己的帳號，手動加入餐廳或者用google map去選
 
@@ -24,7 +24,7 @@ https://what-to-we-eat.vercel.app/
 
 #### 可以先做的部分
 * 使用者註冊，輸入帳號及密碼
-* 使用者登入，回傳session
+* 使用者登入，回傳token
 * 使用者傳一筆餐廳(包含名稱、地址、電話、菜單圖片等)，後端加入清單 
 * 使用者針對某一筆已有餐廳編輯
 * 使用者請求，驗證後回傳餐廳清單(全部)
@@ -39,14 +39,3 @@ https://what-to-we-eat.vercel.app/
 * 相比上面增加更多商業邏輯 
 
 ---
-
-## backend
-## Pre-request
-
-- Docker
-
-## Project Setup 
-```
-% make setup-db
-% docker compose up
-```

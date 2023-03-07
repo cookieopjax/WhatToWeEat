@@ -10,6 +10,11 @@ UI Component Library : [Naive Ui](https://www.naiveui.com/zh-CN/os-theme/compone
 
 CSS framework : [Tailwind CSS](https://tailwindcss.com/docs/installation)
 
+## Pre-install
+```
+Node.js v18.13.0
+```
+
 ## Run this project
 
 ```
