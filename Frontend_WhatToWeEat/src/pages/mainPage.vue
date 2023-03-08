@@ -25,7 +25,7 @@ onMounted(() => {
 <template>
   <NavBar :user-name="userName" />
   <div class="flex justify-center p-5">
-    <div class="flex flex-col gap-4 w-wte-main">
+    <div class="flex flex-col gap-4 sm:w-wte-main w-full">
       <RestaurantPick />
       <RestaurantList />
     </div>

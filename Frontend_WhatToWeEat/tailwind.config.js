@@ -15,7 +15,7 @@ const tailwindConfig = {
         "wte-primary": "rgb(27,162,90)", //主網站色調
       },
       width: {
-        "wte-main": "1000px", // 主畫面內容固定寬度
+        "wte-main": "1200px", // 主畫面內容固定寬度
       },
     },
   },

@@ -1,7 +1,12 @@
-<script setup></script>
+<script setup>
+import LoadingPage from "./pages/LoadingPage.vue";
+import { useStore } from "./store/main";
+const store = useStore();
+</script>
 
 <template>
-  <router-view />
+  <LoadingPage v-if="store.isLoadingPage" />
+  <router-view v-else />
 </template>
 
 <style></style>

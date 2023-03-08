@@ -13,10 +13,10 @@
         <img
           src="@/assets/foodEmpty.jpg"
           alt="food"
-          class="w-36 bg-cover flex-none"
+          class="w-28 bg-cover flex-none"
         >
         <div
-          class="flex flex-col h-36 p-2"
+          class="flex flex-col h-28 p-2"
           style="min-width: 0px"
         >
           <div class="flex-[0_0_30%]">
@@ -24,7 +24,7 @@
               {{ item.name }}
             </h4>
           </div>
-          <div class="flex-[0_0_50%]">
+          <div class="flex-[0_0_40%]">
             <p class="truncate-3">
               {{ item.address }}
             </p>
