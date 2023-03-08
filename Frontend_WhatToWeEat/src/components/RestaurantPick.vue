@@ -1,20 +1,20 @@
 <template>
   <div
-    class="flex justify-center items-start w-full sm:h-36 gap-3 sm:flex-row flex-col"
+    class="flex justify-center items-start sm:h-36 gap-3 sm:flex-row flex-col"
   >
     <div
       class="bg-wte-blue-bg w-full flex flex-col sm:flex-row drop-shadow sm:h-full"
       :class="{ 'h-24': !isPick }"
     >
       <h5
-        v-if="!isPick"
+        v-show="!isPick"
         class="flex items-center justify-center w-full h-full cursor-pointer"
         @click="getRecommendButton"
       >
         點擊取得今日推薦
       </h5>
       <div
-        v-else
+        v-show="isPick"
         class="w-full flex flex-col sm:flex-row"
       >
         <!--給圖片的畫框-->
@@ -34,11 +34,11 @@
       </div>
     </div>
 
-    <div class="gap-3 flex flex-row sm:flex-col">
+    <div class="gap-2 sm:flex flex-row sm:flex-col hidden">
       <n-button
-        size="large"
         type="primary"
         class="bg-wte-primary"
+        @click="getRestaurantPick"
       >
         <n-icon>
           <Refresh />
@@ -46,7 +46,6 @@
         更換餐廳
       </n-button>
       <n-button
-        size="large"
         type="primary"
         class="bg-wte-primary"
         @click="isAddRestaurant = true"
@@ -57,7 +56,6 @@
         新增餐廳
       </n-button>
       <n-button
-        size="large"
         type="primary"
         class="bg-wte-primary"
       >
@@ -126,6 +124,40 @@
         </template>
       </n-card>
     </n-modal>
+
+    <div
+      class="w-full flex p-0 h-10 sm:hidden fixed bottom-0 left-0 gap-3 justify-end pr-4"
+    >
+      <n-button
+        circle
+        type="primary"
+        class="bg-wte-primary"
+        @click="getRestaurantPick"
+      >
+        <n-icon>
+          <Refresh />
+        </n-icon>
+      </n-button>
+      <n-button
+        circle
+        type="primary"
+        class="bg-wte-primary"
+        @click="isAddRestaurant = true"
+      >
+        <n-icon>
+          <Add />
+        </n-icon>
+      </n-button>
+      <n-button
+        circle
+        type="primary"
+        class="bg-wte-primary"
+      >
+        <n-icon>
+          <pencil />
+        </n-icon>
+      </n-button>
+    </div>
   </div>
 </template>
 
@@ -145,13 +177,15 @@ import { reactive, ref } from "vue";
 import { apiGetRestaurantPick, apiPostRestaurant } from "@/api";
 import { Refresh, Add, Pencil } from "@vicons/ionicons5";
 import { useStore } from "../store/main";
+import { useMessage } from "naive-ui";
+const message = useMessage();
 const store = useStore();
 
 // isPick : false:按鈕狀態 true顯示餐廳資訊
-let isPick = ref(false);
-let isAddRestaurant = ref(false);
-let restaurantData = reactive({ value: [] });
-let restaurantForm = reactive({
+const isPick = ref(false);
+const isAddRestaurant = ref(false);
+const restaurantData = reactive({ value: [] });
+const restaurantForm = reactive({
   name: "",
   phone: "",
   address: "",
@@ -159,11 +193,11 @@ let restaurantForm = reactive({
 });
 
 function getRecommendButton() {
-  getData();
+  getRestaurantPick();
   isPick.value = true;
 }
 
-const getData = async () => {
+const getRestaurantPick = async () => {
   try {
     const res = await apiGetRestaurantPick();
     restaurantData.value = res.data;
