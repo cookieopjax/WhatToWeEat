@@ -4,7 +4,7 @@
   >
     <div
       class="bg-wte-blue-bg w-full flex flex-col sm:flex-row drop-shadow sm:h-full"
-      :class="{ 'h-24': !isPick }"
+      :class="{ 'h-32': !isPick }"
     >
       <h5
         v-show="!isPick"
@@ -27,7 +27,7 @@
         </div>
 
         <div class="p-4 flex flex-col justify-center">
-          <h2>{{ restaurantData.value.name }}</h2>
+          <h3>{{ restaurantData.value.name }}</h3>
           <p>{{ restaurantData.value.address }}</p>
           <p>{{ restaurantData.value.phone }}</p>
         </div>
@@ -69,10 +69,11 @@
 
     <!-- 手機板功能鍵區 -->
     <div
-      class="w-full flex p-0 h-10 sm:hidden fixed bottom-2 left-0 gap-3 justify-end pr-4"
+      class="w-full flex p-0 h-10 sm:hidden fixed bottom-3 left-0 gap-3 justify-end pr-4"
     >
       <n-button
         circle
+        size="large"
         type="primary"
         class="bg-wte-primary"
         @click="getRestaurantPick"
@@ -83,6 +84,7 @@
       </n-button>
       <n-button
         circle
+        size="large"
         type="primary"
         class="bg-wte-primary"
         @click="isAddRestaurant = true"
@@ -93,6 +95,7 @@
       </n-button>
       <n-button
         circle
+        size="large"
         type="primary"
         class="bg-wte-primary"
       >

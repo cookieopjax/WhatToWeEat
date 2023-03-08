@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { apiAuthentication } from "@/api";
-import LoadingPage from "../pages/LoadingPage.vue";
 import { useStore } from "../store/main";
 
 //路由懶加載 (動態載入)
