@@ -34,6 +34,7 @@
       </div>
     </div>
 
+    <!-- 電腦版功能鍵區 -->
     <div class="gap-2 sm:flex flex-row sm:flex-col hidden">
       <n-button
         type="primary"
@@ -66,6 +67,42 @@
       </n-button>
     </div>
 
+    <!-- 手機板功能鍵區 -->
+    <div
+      class="w-full flex p-0 h-10 sm:hidden fixed bottom-2 left-0 gap-3 justify-end pr-4"
+    >
+      <n-button
+        circle
+        type="primary"
+        class="bg-wte-primary"
+        @click="getRestaurantPick"
+      >
+        <n-icon>
+          <Refresh />
+        </n-icon>
+      </n-button>
+      <n-button
+        circle
+        type="primary"
+        class="bg-wte-primary"
+        @click="isAddRestaurant = true"
+      >
+        <n-icon>
+          <Add />
+        </n-icon>
+      </n-button>
+      <n-button
+        circle
+        type="primary"
+        class="bg-wte-primary"
+      >
+        <n-icon>
+          <pencil />
+        </n-icon>
+      </n-button>
+    </div>
+
+    <!-- 新增餐廳 modal -->
     <n-modal v-model:show="isAddRestaurant">
       <n-card
         style="width: 600px"
@@ -124,40 +161,6 @@
         </template>
       </n-card>
     </n-modal>
-
-    <div
-      class="w-full flex p-0 h-10 sm:hidden fixed bottom-0 left-0 gap-3 justify-end pr-4"
-    >
-      <n-button
-        circle
-        type="primary"
-        class="bg-wte-primary"
-        @click="getRestaurantPick"
-      >
-        <n-icon>
-          <Refresh />
-        </n-icon>
-      </n-button>
-      <n-button
-        circle
-        type="primary"
-        class="bg-wte-primary"
-        @click="isAddRestaurant = true"
-      >
-        <n-icon>
-          <Add />
-        </n-icon>
-      </n-button>
-      <n-button
-        circle
-        type="primary"
-        class="bg-wte-primary"
-      >
-        <n-icon>
-          <pencil />
-        </n-icon>
-      </n-button>
-    </div>
   </div>
 </template>
 
@@ -177,8 +180,7 @@ import { reactive, ref } from "vue";
 import { apiGetRestaurantPick, apiPostRestaurant } from "@/api";
 import { Refresh, Add, Pencil } from "@vicons/ionicons5";
 import { useStore } from "../store/main";
-import { useMessage } from "naive-ui";
-const message = useMessage();
+
 const store = useStore();
 
 // isPick : false:按鈕狀態 true顯示餐廳資訊

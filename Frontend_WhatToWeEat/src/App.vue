@@ -1,11 +1,12 @@
 <script setup>
-import { NMessageProvider } from "naive-ui";
+import LoadingPage from "./pages/LoadingPage.vue";
+import { useStore } from "./store/main";
+const store = useStore();
 </script>
 
 <template>
-  <n-message-provider>
-    <router-view />
-  </n-message-provider>
+  <LoadingPage v-if="store.isLoadingPage" />
+  <router-view v-else />
 </template>
 
 <style></style>
