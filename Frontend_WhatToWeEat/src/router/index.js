@@ -40,6 +40,7 @@ const isLogin = async (store) => {
     store.isLoadingPage = false;
     return true;
   } catch (err) {
+    store.isLoadingPage = false;
     router.push({ path: "/login" });
   }
 };

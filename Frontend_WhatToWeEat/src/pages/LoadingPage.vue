@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="container h-screen w-screen bg-wte-bg flex items-center justify-center flex-col"
+    class="h-screen w-screen bg-wte-bg flex items-center justify-center flex-col"
   >
     <div class="loader">
       <div class="loader--dot"></div>

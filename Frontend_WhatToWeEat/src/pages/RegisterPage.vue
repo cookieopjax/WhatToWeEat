@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen bg-wte-bg">
-    <div class="flex flex-col justify-center items-center h-screen">
+    <div class="flex flex-col justify-center items-center h-screen m-0 p-0">
       <img
         src="@/assets/icon.png"
         alt=""
@@ -100,35 +100,35 @@ const router = useRouter();
 let isError = ref(false); //處理由後端回傳的錯誤(如:"已有此使用者名稱"等)
 
 let account = reactive({
-	userName: "",
-	password: "",
-	confirmPassword: "",
+  userName: "",
+  password: "",
+  confirmPassword: "",
 });
 
 let isFocus = reactive([false, false, false]); //三個input框是否有被點擊過
 
 function submitHandler() {
-	userRegister();
-	//router.push({ path: "/login" });
+  userRegister();
+  //router.push({ path: "/login" });
 }
 
 const userRegister = async () => {
-	try {
-		const res = await apiRegister({
-			username: account.userName,
-			password: account.password,
-		});
-		router.push({ path: "/login" });
-	} catch (err) {
-		//帳密重複
-		if (err.response.status === 409) {
-			isError.value = true;
-			return;
-		}
+  try {
+    const res = await apiRegister({
+      username: account.userName,
+      password: account.password,
+    });
+    router.push({ path: "/login" });
+  } catch (err) {
+    //帳密重複
+    if (err.response.status === 409) {
+      isError.value = true;
+      return;
+    }
 
-		//其他非預期的錯誤
-		console.error(err);
-	}
+    //其他非預期的錯誤
+    console.error(err);
+  }
 };
 </script>
 
