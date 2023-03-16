@@ -13,17 +13,14 @@
       >
         點擊取得今日推薦
       </h5>
-      <div
-        v-show="isPick"
-        class="w-full flex flex-col sm:flex-row"
-      >
+      <div v-show="isPick" class="w-full flex flex-col sm:flex-row">
         <!--給圖片的畫框-->
         <div class="w-full h-[50vw] sm:w-64 sm:h-36 bg-wte-warning">
           <img
             src="@/assets/bigFood.jpg"
             alt=""
             class="object-cover w-full h-full"
-          >
+          />
         </div>
 
         <div class="p-4 flex flex-col justify-center">
@@ -56,10 +53,7 @@
         </n-icon>
         新增餐廳
       </n-button>
-      <n-button
-        type="primary"
-        class="bg-wte-primary"
-      >
+      <n-button type="primary" class="bg-wte-primary">
         <n-icon>
           <pencil />
         </n-icon>
@@ -93,12 +87,7 @@
           <Add />
         </n-icon>
       </n-button>
-      <n-button
-        circle
-        size="large"
-        type="primary"
-        class="bg-wte-primary"
-      >
+      <n-button circle size="large" type="primary" class="bg-wte-primary">
         <n-icon>
           <pencil />
         </n-icon>
@@ -115,26 +104,21 @@
         role="dialog"
         aria-modal="true"
       >
-        <n-form :model="restaurantForm">
-          <n-grid
-            x-gap="12"
-            y-gap="12"
-            cols="2"
-            responsive="screen"
-          >
-            <n-form-item-gi label="餐廳名稱">
+        <n-form :model="restaurantForm" ref="formRef" :rules="rules">
+          <n-grid x-gap="12" y-gap="12" cols="2" responsive="screen">
+            <n-form-item-gi label="餐廳名稱" path="name">
               <n-input
                 v-model:value="restaurantForm.name"
                 placeholder="餐廳名稱"
               />
             </n-form-item-gi>
-            <n-form-item-gi label="餐廳電話">
+            <n-form-item-gi label="餐廳電話" path="phone">
               <n-input
                 v-model:value="restaurantForm.phone"
-                placeholder="餐廳名稱"
+                placeholder="餐廳電話"
               />
             </n-form-item-gi>
-            <n-form-item-gi label="餐廳地址">
+            <n-form-item-gi label="餐廳地址" path="address">
               <n-input
                 v-model:value="restaurantForm.address"
                 placeholder="餐廳地址"
@@ -143,12 +127,8 @@
           </n-grid>
         </n-form>
 
-        <p class="mb-1">
-          圖片上傳
-        </p>
-        <n-upload list-type="image-card">
-          點擊上傳
-        </n-upload>
+        <p class="mb-1">圖片上傳</p>
+        <n-upload list-type="image-card"> 點擊上傳 </n-upload>
 
         <template #footer>
           <div class="flex w-full">
@@ -156,7 +136,7 @@
               type="primary"
               size="large"
               class="bg-wte-primary ml-auto"
-              @click="postRestaurant"
+              @click="handleInputValidation"
             >
               送出
             </n-button>
@@ -197,6 +177,32 @@ const restaurantForm = reactive({
   image: "",
 });
 
+const formRef = ref(null);
+const rules = ref({
+  name: {
+    required: true,
+    message: "請輸入餐廳名稱",
+    trigger: ["input", "blur"],
+  },
+  phone: {
+    required: true,
+    validator(rule, value) {
+      if (!value) {
+        return new Error("請輸入電話");
+      } else if (!/0\d{9}/.test(value)) {
+        return new Error("電話格式錯誤");
+      }
+      return true;
+    },
+    trigger: ["input", "blur"],
+  },
+  address: {
+    required: true,
+    message: "請輸入餐廳地址",
+    trigger: ["input", "blur"],
+  },
+});
+
 function getRecommendButton() {
   getRestaurantPick();
   isPick.value = true;
@@ -219,6 +225,19 @@ const postRestaurant = async () => {
   } catch (err) {
     console.error(err);
   }
+};
+
+const handleInputValidation = async (e) => {
+  e.preventDefault();
+  formRef.value?.validate((errors) => {
+    if (!errors) {
+      console.log("Valid");
+      postRestaurant();
+    } else {
+      console.log("Invalid");
+      console.log(errors);
+    }
+  });
 };
 </script>
 
