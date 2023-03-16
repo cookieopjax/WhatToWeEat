@@ -6,9 +6,9 @@
 
 https://what-to-we-eat.vercel.app/
 
-前端 : Vue (部屬 : vercel)
+前端 : Vue (部屬 : Vercel)
 
-後端 : Express (部屬 : render)
+後端 : Express (部屬 : Render)
 
 使用者可以註冊自己的帳號，手動加入餐廳或者用google map去選
 
