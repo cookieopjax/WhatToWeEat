@@ -166,31 +166,6 @@ router.put("/restaurants/:id", authentication, updateRestaurant);
  *     summary: Delete a specified restaurant by its id.
  *     tags:
  *      - Restaurant
- *     parameters:
- *      - in: body
- *        name: body
- *        description: Restaurant object (without username)
- *        schema:
- *          type: object
- *          required:
- *            - id
- *            - name
- *            - phone
- *            - address
- *            - image
- *          properties:
- *            id:
- *              type: string
- *            name:
- *              type: string
- *            phone:
- *              type: string
- *            address:
- *              type: string
- *            image:
- *              type: string
- *
- *     description: Delete a restaurant
  *     responses:
  *       200:
  *         description: Success! return the deleted restaurant name
