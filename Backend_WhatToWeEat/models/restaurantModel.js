@@ -33,6 +33,7 @@ Restaurant.updateRestaurant = async (restaurant) => {
       id: restaurant.id,
     },
   });
+
   return;
 };
 

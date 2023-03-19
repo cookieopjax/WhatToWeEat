@@ -7,9 +7,10 @@ const {
   getRestaurant,
   updateRestaurant,
   deleteRestaurant,
+  postRestaurantImage,
 } = require("../controllers/restaurantController");
 const { authentication } = require("../utils/jwt");
-
+const { uploadRestImg } = require("../utils/fileUpload");
 //取得所有餐廳
 /**
  * @swagger
@@ -91,7 +92,7 @@ router.post("/restaurants", authentication, addRestaurant);
 //取得指定id餐廳資訊
 /**
  * @swagger
- * /api/restaurants/:id:
+ * /api/restaurants/{id}:
  *   get:
  *     summary: Get a restaurant info from its id
  *     tags:
@@ -114,7 +115,7 @@ router.get("/restaurants/:id", authentication, getRestaurant);
 //更新指定id餐廳資訊
 /**
  * @swagger
- * /api/restaurants/:id:
+ * /api/restaurants/{id}:
  *   put:
  *     summary: Update a specified restaurant by its id.
  *     tags:
@@ -161,7 +162,7 @@ router.put("/restaurants/:id", authentication, updateRestaurant);
 //刪除指定id餐廳資訊
 /**
  * @swagger
- * /api/restaurants/:id:
+ * /api/restaurants/{id}:
  *   delete:
  *     summary: Delete a specified restaurant by its id.
  *     tags:
@@ -179,5 +180,52 @@ router.put("/restaurants/:id", authentication, updateRestaurant);
  *         description: Internal server error
  */
 router.delete("/restaurants/:id", authentication, deleteRestaurant);
+
+//上傳餐廳圖片
+/**
+ * @swagger
+ * /api/restaurants/image/{id}:
+ *   post:
+ *     summary: Upload an image by restaurant id
+ *     tags:
+ *       - Restaurant
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: ID of the restaurant to upload image for
+ *         required: true
+ *         schema:
+ *           type: integer
+ *       - in: formData
+ *         name: image
+ *         type: file
+ *         description: The file to upload
+ *         required: true
+ *     description: Upload an image for a restaurant
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Image uploaded successfully
+ *         schema:
+ *           type: object
+ *           properties:
+ *             imageUrl:
+ *               type: string
+ *               description: The URL of the uploaded image
+ *       400:
+ *         description: Bad request, image not uploaded
+ *       401:
+ *         description: Unauthorized, authentication required
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post(
+  "/restaurants/image/:id",
+  authentication,
+  uploadRestImg,
+  postRestaurantImage
+);
 
 module.exports = router;
