@@ -9,8 +9,12 @@ const {
   deleteRestaurant,
   postRestaurantImage,
 } = require("../controllers/restaurantController");
+
 const { authentication } = require("../utils/jwt");
 const { uploadRestImg } = require("../utils/fileUpload");
+const { errorWrapper } = require("../middlewares/errorHandler");
+const { getRestById } = require("../middlewares/restaurant");
+
 //取得所有餐廳
 /**
  * @swagger
@@ -28,7 +32,7 @@ const { uploadRestImg } = require("../utils/fileUpload");
  *       500:
  *         description: Internal server error
  */
-router.get("/restaurants", authentication, getAllRestaurant);
+router.get("/restaurants", authentication, errorWrapper(getAllRestaurant));
 
 //取得推薦餐廳
 /**
@@ -47,7 +51,11 @@ router.get("/restaurants", authentication, getAllRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.get("/recommendation", authentication, getRecommendRestaurant);
+router.get(
+  "/recommendation",
+  authentication,
+  errorWrapper(getRecommendRestaurant)
+);
 
 //新增一筆餐廳
 /**
@@ -87,7 +95,7 @@ router.get("/recommendation", authentication, getRecommendRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.post("/restaurants", authentication, addRestaurant);
+router.post("/restaurants", authentication, errorWrapper(addRestaurant));
 
 //取得指定id餐廳資訊
 /**
@@ -110,7 +118,12 @@ router.post("/restaurants", authentication, addRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.get("/restaurants/:id", authentication, getRestaurant);
+router.get(
+  "/restaurants/:id",
+  authentication,
+  getRestById,
+  errorWrapper(getRestaurant)
+);
 
 //更新指定id餐廳資訊
 /**
@@ -157,7 +170,12 @@ router.get("/restaurants/:id", authentication, getRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.put("/restaurants/:id", authentication, updateRestaurant);
+router.put(
+  "/restaurants/:id",
+  authentication,
+  getRestById,
+  errorWrapper(updateRestaurant)
+);
 
 //刪除指定id餐廳資訊
 /**
@@ -179,7 +197,12 @@ router.put("/restaurants/:id", authentication, updateRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.delete("/restaurants/:id", authentication, deleteRestaurant);
+router.delete(
+  "/restaurants/:id",
+  authentication,
+  getRestById,
+  errorWrapper(deleteRestaurant)
+);
 
 //上傳餐廳圖片
 /**
@@ -225,7 +248,8 @@ router.post(
   "/restaurants/image/:id",
   authentication,
   uploadRestImg,
-  postRestaurantImage
+  getRestById,
+  errorWrapper(postRestaurantImage)
 );
 
 module.exports = router;
