@@ -13,3 +13,5 @@ node_modules
 # Built Visual Studio Code Extensions
 *.vsix
 # ----- End VSCode ignore -----
+
+.env.devlopment

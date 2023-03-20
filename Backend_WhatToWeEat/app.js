@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const dotenv = require("dotenv");
+const { errorHandler } = require("./middlewares/errorHandler");
 const swaggerUi = require("swagger-ui-express"); //產生swagger ui介面
 const userRoutes = require("./routes/userRoutes"); // 引入userRoutes.js路由文件
 const restaurantRoutes = require("./routes/restaurantRoutes"); // 引入userRoutes.js路由文件
@@ -27,6 +28,7 @@ app.use(express.json());
 //把Express掛載路由進來
 app.use("/api", userRoutes);
 app.use("/api", restaurantRoutes);
+app.use(errorHandler);
 
 // 將Swagger UI加到Express中
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
