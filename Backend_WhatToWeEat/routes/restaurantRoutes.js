@@ -1,4 +1,5 @@
 const express = require("express");
+
 const router = express.Router();
 const {
   addRestaurant,
@@ -15,7 +16,7 @@ const { uploadRestImg } = require("../utils/fileUpload");
 const { errorWrapper } = require("../middlewares/errorHandler");
 const { getRestById } = require("../middlewares/restaurant");
 
-//取得所有餐廳
+// 取得所有餐廳
 /**
  * @swagger
  * /api/restaurants:
@@ -34,7 +35,7 @@ const { getRestById } = require("../middlewares/restaurant");
  */
 router.get("/restaurants", authentication, errorWrapper(getAllRestaurant));
 
-//取得推薦餐廳
+// 取得推薦餐廳
 /**
  * @swagger
  * /api/recommendation:
@@ -54,10 +55,10 @@ router.get("/restaurants", authentication, errorWrapper(getAllRestaurant));
 router.get(
   "/recommendation",
   authentication,
-  errorWrapper(getRecommendRestaurant)
+  errorWrapper(getRecommendRestaurant),
 );
 
-//新增一筆餐廳
+// 新增一筆餐廳
 /**
  * @swagger
  * /api/restaurants:
@@ -97,7 +98,7 @@ router.get(
  */
 router.post("/restaurants", authentication, errorWrapper(addRestaurant));
 
-//取得指定id餐廳資訊
+// 取得指定id餐廳資訊
 /**
  * @swagger
  * /api/restaurants/{id}:
@@ -122,10 +123,10 @@ router.get(
   "/restaurants/:id",
   authentication,
   getRestById,
-  errorWrapper(getRestaurant)
+  errorWrapper(getRestaurant),
 );
 
-//更新指定id餐廳資訊
+// 更新指定id餐廳資訊
 /**
  * @swagger
  * /api/restaurants/{id}:
@@ -174,10 +175,10 @@ router.put(
   "/restaurants/:id",
   authentication,
   getRestById,
-  errorWrapper(updateRestaurant)
+  errorWrapper(updateRestaurant),
 );
 
-//刪除指定id餐廳資訊
+// 刪除指定id餐廳資訊
 /**
  * @swagger
  * /api/restaurants/{id}:
@@ -201,10 +202,10 @@ router.delete(
   "/restaurants/:id",
   authentication,
   getRestById,
-  errorWrapper(deleteRestaurant)
+  errorWrapper(deleteRestaurant),
 );
 
-//上傳餐廳圖片
+// 上傳餐廳圖片
 /**
  * @swagger
  * /api/restaurants/image/{id}:
@@ -249,7 +250,7 @@ router.post(
   authentication,
   uploadRestImg,
   getRestById,
-  errorWrapper(postRestaurantImage)
+  errorWrapper(postRestaurantImage),
 );
 
 module.exports = router;

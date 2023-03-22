@@ -20,5 +20,5 @@ const swaggerSpec = swaggerJSDoc(swaggerOptions);
 exports.swaggerSpec = swaggerSpec;
 
 // 建立資料庫
-const sequelize = new Sequelize("sqlite:project.db"); //會以app.js為起點解析目錄
+const sequelize = new Sequelize("sqlite:project.db"); // 會以app.js為起點解析目錄
 exports.sequelize = sequelize;

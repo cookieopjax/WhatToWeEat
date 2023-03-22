@@ -13,14 +13,17 @@
       >
         點擊取得今日推薦
       </h5>
-      <div v-show="isPick" class="w-full flex flex-col sm:flex-row">
+      <div
+        v-show="isPick"
+        class="w-full flex flex-col sm:flex-row"
+      >
         <!--給圖片的畫框-->
         <div class="w-full h-[50vw] sm:w-64 sm:h-36 bg-wte-warning">
           <img
             src="@/assets/bigFood.jpg"
             alt=""
             class="object-cover w-full h-full"
-          />
+          >
         </div>
 
         <div class="p-4 flex flex-col justify-center">
@@ -53,7 +56,10 @@
         </n-icon>
         新增餐廳
       </n-button>
-      <n-button type="primary" class="bg-wte-primary">
+      <n-button
+        type="primary"
+        class="bg-wte-primary"
+      >
         <n-icon>
           <pencil />
         </n-icon>
@@ -87,7 +93,12 @@
           <Add />
         </n-icon>
       </n-button>
-      <n-button circle size="large" type="primary" class="bg-wte-primary">
+      <n-button
+        circle
+        size="large"
+        type="primary"
+        class="bg-wte-primary"
+      >
         <n-icon>
           <pencil />
         </n-icon>
@@ -104,21 +115,39 @@
         role="dialog"
         aria-modal="true"
       >
-        <n-form :model="restaurantForm" ref="formRef" :rules="rules">
-          <n-grid x-gap="12" y-gap="12" cols="2" responsive="screen">
-            <n-form-item-gi label="餐廳名稱" path="name">
+        <n-form
+          ref="formRef"
+          :model="restaurantForm"
+          :rules="rules"
+        >
+          <n-grid
+            x-gap="12"
+            y-gap="12"
+            cols="2"
+            responsive="screen"
+          >
+            <n-form-item-gi
+              label="餐廳名稱"
+              path="name"
+            >
               <n-input
                 v-model:value="restaurantForm.name"
                 placeholder="餐廳名稱"
               />
             </n-form-item-gi>
-            <n-form-item-gi label="餐廳電話" path="phone">
+            <n-form-item-gi
+              label="餐廳電話"
+              path="phone"
+            >
               <n-input
                 v-model:value="restaurantForm.phone"
                 placeholder="餐廳電話"
               />
             </n-form-item-gi>
-            <n-form-item-gi label="餐廳地址" path="address">
+            <n-form-item-gi
+              label="餐廳地址"
+              path="address"
+            >
               <n-input
                 v-model:value="restaurantForm.address"
                 placeholder="餐廳地址"
@@ -127,8 +156,12 @@
           </n-grid>
         </n-form>
 
-        <p class="mb-1">圖片上傳</p>
-        <n-upload list-type="image-card"> 點擊上傳 </n-upload>
+        <p class="mb-1">
+          圖片上傳
+        </p>
+        <n-upload list-type="image-card">
+          點擊上傳
+        </n-upload>
 
         <template #footer>
           <div class="flex w-full">
