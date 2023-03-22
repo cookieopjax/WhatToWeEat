@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "lint" : "npx eslint src/**/*.js src/**/*.vue",
     "preview": "vite preview"
   },
   "dependencies": {
