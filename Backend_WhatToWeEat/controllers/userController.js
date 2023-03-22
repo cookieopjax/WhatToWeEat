@@ -3,20 +3,20 @@ const { generateJwt, getUsername } = require("../utils/jwt");
 
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-  const selectedUser = await User.findOne({ where: { username: username } });
-  //找不到帳號
+  const selectedUser = await User.findOne({ where: { username } });
+  // 找不到帳號
   if (!selectedUser) {
     res.status(404).json({ msg: "User not found." });
     return;
   }
 
-  //密碼錯誤
+  // 密碼錯誤
   if (selectedUser.dataValues.password !== password) {
     res.status(401).json({ msg: "Incorrect password." });
     return;
   }
 
-  //正確，發出token
+  // 正確，發出token
   const token = generateJwt({ username });
   res.status(200).json({ token });
 };
@@ -39,6 +39,6 @@ exports.register = async (req, res) => {
 };
 
 exports.authentication = async (req, res) => {
-  let username = await getUsername(req, res);
+  const username = await getUsername(req, res);
   res.status(200).json({ username });
 };

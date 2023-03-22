@@ -1,4 +1,4 @@
-const { Restaurant } = require("../models/");
+const { Restaurant } = require("../models");
 const { getUsername } = require("../utils/jwt");
 
 exports.getRestById = async (req, res, next) => {
@@ -11,7 +11,7 @@ exports.getRestById = async (req, res, next) => {
     return;
   }
 
-  if (selectedRestaurant.username != username) {
+  if (selectedRestaurant.username !== username) {
     res.status(403).send("Forbidden");
     return;
   }

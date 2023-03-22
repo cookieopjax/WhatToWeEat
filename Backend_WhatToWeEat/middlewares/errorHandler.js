@@ -1,11 +1,9 @@
-exports.errorWrapper = (handler) => {
-  return async (req, res, next) => {
-    try {
-      await handler(req, res, next);
-    } catch (error) {
-      next(error);
-    }
-  };
+exports.errorWrapper = (handler) => async (req, res, next) => {
+  try {
+    await handler(req, res, next);
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.errorHandler = (err, req, res, next) => {
