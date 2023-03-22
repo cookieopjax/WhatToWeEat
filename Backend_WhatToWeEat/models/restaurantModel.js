@@ -11,28 +11,32 @@ const Restaurant = sequelize.define("Restaurant", {
 
 // 取得該使用者下的所有餐廳
 Restaurant.getUserRestaurants = async (username) => {
-  await Restaurant.findAll({
+  const allRest = await Restaurant.findAll({
     where: {
       username,
     },
   });
+  return allRest;
 };
 
 Restaurant.createRestaurant = async (restaurant) => {
-  await Restaurant.create(restaurant);
+  const newRest = await Restaurant.create(restaurant);
+  console.log(newRest);
 };
 
 Restaurant.getRestaurant = async (id) => {
-  await Restaurant.findOne({ where: { id } });
+  const rest = await Restaurant.findOne({ where: { id } });
+  return rest;
 };
 
 // 更新指定id的餐廳資訊
 Restaurant.updateRestaurant = async (restaurant) => {
-  await Restaurant.update(restaurant, {
+  const updatedRest = await Restaurant.update(restaurant, {
     where: {
       id: restaurant.id,
     },
   });
+  return updatedRest;
 };
 
 // 刪除指定id的餐廳資訊
