@@ -19,9 +19,13 @@ const app = express();
 app.use(cors());
 
 // 進行資料庫更新
-sequelize.sync();
+// sequelize.sync();
 
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.status(200).json({ msg: "server is running" });
+});
 
 // 把Express掛載路由進來
 app.use("/api", userRoutes);
@@ -31,8 +35,10 @@ app.use(errorHandler);
 // 將Swagger UI加到Express中
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+module.exports = app;
+
 // 啟動Express
-app.listen(4234, () => {
-  console.log(`-> Express server listening on port http://localhost:4234
--> You can see the api docs on http://localhost:4234/api-docs`);
-});
+// app.listen(4234, () => {
+//   console.log(`-> Express server listening on port http://localhost:4234
+// -> You can see the api docs on http://localhost:4234/api-docs`);
+// });
