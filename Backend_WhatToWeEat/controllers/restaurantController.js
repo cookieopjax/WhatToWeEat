@@ -7,7 +7,6 @@ exports.getAllRestaurant = async (req, res) => {
   const username = await getUsername(req, res);
 
   const restaurantList = await Restaurant.getUserRestaurants(username);
-  console.log(restaurantList);
   res.send(restaurantList);
 };
 

@@ -21,7 +21,7 @@ Restaurant.getUserRestaurants = async (username) => {
 
 Restaurant.createRestaurant = async (restaurant) => {
   const newRest = await Restaurant.create(restaurant);
-  console.log(newRest);
+  return newRest;
 };
 
 Restaurant.getRestaurant = async (id) => {

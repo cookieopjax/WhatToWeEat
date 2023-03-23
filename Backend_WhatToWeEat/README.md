@@ -12,6 +12,12 @@ npm install
 npm run dev
 ```
 
+## Run test
+```
+npm run test
+```
+
+
 ## Environment Variable
 有一些機密的變數，不方面在加到git上，部屬時才會加上正式的.env檔案。
 
@@ -33,9 +39,12 @@ app/
 |   |-- userRoutes.js
 |-- utils/
 |   |-- database.js
-|-- app.jss
+|-- tests/
+|   |-- .test.js
+|-- app.js
+|-- main.js
 ```
-app.js會去引入database和route
+main.js會引入app.js，app會去引入database和route
 
 database.js去連結資料庫，呼叫model建立table
 
