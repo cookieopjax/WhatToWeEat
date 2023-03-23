@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "backend": "cross-env NODE_ENV=production node app.js",
+    "dev": "nodemon main.js",
+    "backend": "cross-env NODE_ENV=production node main.js",
     "lint": "npx eslint . --ext .js",
-    "test": "jest --detectOpenHandles"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
