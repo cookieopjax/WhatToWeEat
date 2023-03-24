@@ -20,12 +20,19 @@ describe("Test the restaurant", () => {
     const response = await request(app)
       .post("/api/restaurants")
       .send({
-        name: "test rest",
+        name: "測試餐廳",
         phone: "09090909093",
         address: "台灣Taiwan3",
       })
       .set("Authorization", `Bearer ${token}`);
     testRestId = response.body.id;
+  });
+
+  afterEach(async () => {
+    // 測試用例開始前，先創建一個餐廳，並取得其生成的 ID
+    const response = await request(app)
+      .delete(`/api/restaurants/${testRestId}`)
+      .set("Authorization", `Bearer ${token}`);
   });
 
   afterEach(async () => {
@@ -67,7 +74,7 @@ describe("Test the restaurant", () => {
       .set("Authorization", `Bearer ${token}`)
       .then((response) => {
         expect(response.statusCode).toBe(200);
-        expect(response.body).toHaveProperty("name", "test rest");
+        expect(response.body).toHaveProperty("name", "測試餐廳");
         done();
       });
   });

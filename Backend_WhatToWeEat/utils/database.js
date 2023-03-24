@@ -1,4 +1,4 @@
-const { Sequelize, Model, DataTypes } = require("sequelize");
+const { Sequelize } = require("sequelize");
 const swaggerJSDoc = require("swagger-jsdoc"); // 產生swagger api檔案
 
 // Swagger文檔配置
