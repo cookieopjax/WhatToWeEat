@@ -1,17 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const swaggerUi = require("swagger-ui-express"); // 產生swagger ui介面
+const dotenv = require("./utils/envSetup");
 const { errorHandler } = require("./middlewares/errorHandler");
 const userRoutes = require("./routes/userRoutes"); // 引入userRoutes.js路由文件
 const restaurantRoutes = require("./routes/restaurantRoutes"); // 引入userRoutes.js路由文件
 const { swaggerSpec } = require("./utils/database");
-
-if (process.env.NODE_ENV === "production") {
-  dotenv.config({ path: ".env" });
-} else {
-  dotenv.config({ path: ".env.development" });
-}
 
 const app = express();
 
