@@ -19,6 +19,13 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 exports.swaggerSpec = swaggerSpec;
 
+let sequelize;
+
 // 建立資料庫
-const sequelize = new Sequelize("sqlite:project.db"); // 會以app.js為起點解析目錄
+if (process.env.NODE_ENV === "production") {
+  sequelize = new Sequelize(process.env.DB_URL);
+} else {
+  sequelize = new Sequelize("sqlite:project.db"); // 會以app.js為起點解析目錄
+}
+
 exports.sequelize = sequelize;
