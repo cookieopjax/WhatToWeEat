@@ -1,5 +1,4 @@
 <script setup>
-import { NPopover } from "naive-ui";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
