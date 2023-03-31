@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 const swaggerJSDoc = require("swagger-jsdoc"); // 產生swagger api檔案
 
 // Swagger文檔配置
@@ -19,13 +19,6 @@ const swaggerOptions = {
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 exports.swaggerSpec = swaggerSpec;
 
-let sequelize;
-
 // 建立資料庫
-if (process.env.NODE_ENV === "production") {
-  sequelize = new Sequelize(process.env.DB_URL);
-} else {
-  sequelize = new Sequelize("sqlite:project.db"); // 會以app.js為起點解析目錄
-}
-
+const sequelize = new Sequelize("sqlite:project.db"); //會以app.js為起點解析目錄
 exports.sequelize = sequelize;

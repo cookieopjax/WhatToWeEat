@@ -22,9 +22,17 @@ npm install
 npm run dev
 ```
 
-## Lint 
+run the test database
+
 ```
-npm run lint
+npm i -g json-server
+json-server -p 4000 data.json
+```
+
+ESLint
+
+```
+npx eslint src/**/*.js src/**/*.vue
 ```
 
 ## Recommend vscode extension
@@ -32,7 +40,7 @@ npm run lint
 - Vue 3 Snippets
 - Tailwind CSS IntelliSense
 - PostCSS Language Support
-- Prettier ESLint 
+- ESLint
 
 ---
 

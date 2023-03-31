@@ -10,20 +10,11 @@
       :key="item.id"
     >
       <div class="border flex">
-        <n-image
-          v-if="item.image"
-          :src="item.image"
-          object-fit="cover"
-          class="h-28 w-28"
-          lazy="true"
-        />
-        <n-image
-          v-else
-          object-fit="cover"
-          :src="fakeImg"
-          class="h-28 w-28"
-          lazy="true"
-        />
+        <img
+          src="@/assets/foodEmpty.jpg"
+          alt="food"
+          class="w-28 bg-cover flex-none"
+        >
         <div
           class="flex flex-col h-28 p-2"
           style="min-width: 0px"
@@ -56,9 +47,8 @@
 
 <script setup>
 import { onBeforeMount } from "vue";
+import { NGrid, NGi, NButton } from "naive-ui";
 import { useStore } from "../store/main";
-import fakeImg from "@/assets/foodEmpty.jpg";
-
 const store = useStore();
 
 onBeforeMount(() => {

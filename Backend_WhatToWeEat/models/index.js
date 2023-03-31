@@ -1,4 +1,4 @@
-const { User } = require("./userModel");
-const { Restaurant } = require("./restaurantModel");
+const { User } = require("../models/userModel");
+const { Restaurant } = require("../models/restaurantModel");
 
 module.exports = { User, Restaurant };

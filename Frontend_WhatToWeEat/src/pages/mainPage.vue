@@ -1,5 +1,8 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import NavBar from "@/components/NavBar.vue";
+import RestaurantList from "@/components/RestaurantList.vue";
+import RestaurantPick from "@/components/RestaurantPick.vue";
 import { apiAuthentication } from "@/api";
 
 let userName = ref("");

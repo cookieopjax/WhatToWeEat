@@ -1,0 +1,47 @@
+{
+    "allRestaurant": [
+        {
+            "name": "四海遊龍",
+            "address": "台北市天龍街台灣大道二段",
+            "phone": "09878787878",
+            "id": 1
+        },
+        {
+            "name": "八方雲集",
+            "address": "台中市校波街台灣大道二段",
+            "phone": "0987587878",
+            "id": 2
+        },
+        {
+            "name": "我是一間名字很長的店我是一間名字很長的店",
+            "address": "美國華盛頓州西雅圖大道二段街台灣大道二段",
+            "phone": "04-26846666",
+            "id": 3
+        },
+        {
+            "name": "cool",
+            "address": "Unless otherwise noted, all content copyright New York University. All rights reserved.",
+            "phone": "09878787878",
+            "id": 4
+        },
+        {
+            "name": "為溢美",
+            "address": "彰化縣七美鄉八七街",
+            "phone": "09878787878",
+            "id": 5
+        },
+        {
+            "name": "銅錵和牛海鮮鍋物",
+            "address": "台中市南屯區公益路二段 830 號",
+            "phone": "(04) 2258-1135",
+            "id": 6
+        }
+    ],
+    "getRestaurant": [
+        {
+            "name": "銅錵和牛海鮮鍋物",
+            "address": "台中市南屯區公益路二段 830 號",
+            "phone": "(04) 2258-1135"
+        }
+    ]
+}

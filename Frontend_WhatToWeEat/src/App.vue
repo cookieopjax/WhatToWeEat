@@ -5,10 +5,8 @@ const store = useStore();
 </script>
 
 <template>
-  <n-message-provider>
-    <LoadingPage v-if="store.isLoadingPage" />
-    <router-view v-else />
-  </n-message-provider>
+  <LoadingPage v-if="store.isLoadingPage" />
+  <router-view v-else />
 </template>
 
 <style></style>

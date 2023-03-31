@@ -17,5 +17,3 @@ export const apiAuthentication = () => instance.get("/authentication");
 export const apiGetAllRestaurant = () => instance.get("/restaurants");
 export const apiPostRestaurant = (data) => instance.post("/restaurants", data);
 export const apiGetRestaurantPick = () => instance.get("/recommendation");
-export const apiPostRestImg = (data, id) =>
-  instance.post(`/restaurants/image/${id}`, data);
