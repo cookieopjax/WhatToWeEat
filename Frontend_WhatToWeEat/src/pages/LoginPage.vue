@@ -75,7 +75,6 @@
 </template>
 
 <script setup>
-import { NButton, NInput } from "naive-ui";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { apiLogin } from "@/api";
@@ -105,7 +104,7 @@ const userLogin = async () => {
     router.push({ path: "/" });
   } catch (err) {
     //帳密錯誤
-    if (err.response.status === 401 ||err.response.status === 404) {
+    if (err.response.status === 401 || err.response.status === 404) {
       isError.value = true;
       return;
     }

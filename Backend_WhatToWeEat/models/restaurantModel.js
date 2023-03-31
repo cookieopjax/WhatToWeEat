@@ -1,5 +1,5 @@
+const { DataTypes } = require("sequelize");
 const { sequelize } = require("../utils/database");
-const { Model, DataTypes } = require("sequelize");
 
 const Restaurant = sequelize.define("Restaurant", {
   username: DataTypes.STRING,
@@ -11,39 +11,41 @@ const Restaurant = sequelize.define("Restaurant", {
 
 // 取得該使用者下的所有餐廳
 Restaurant.getUserRestaurants = async (username) => {
-  return await Restaurant.findAll({
+  const allRest = await Restaurant.findAll({
     where: {
-      username: username,
+      username,
     },
   });
+  return allRest;
 };
 
 Restaurant.createRestaurant = async (restaurant) => {
-  return await Restaurant.create(restaurant);
+  const newRest = await Restaurant.create(restaurant);
+  return newRest;
 };
 
 Restaurant.getRestaurant = async (id) => {
-  return await Restaurant.findOne({ where: { id: id } });
+  const rest = await Restaurant.findOne({ where: { id } });
+  return rest;
 };
 
 // 更新指定id的餐廳資訊
 Restaurant.updateRestaurant = async (restaurant) => {
-  await Restaurant.update(restaurant, {
+  const updatedRest = await Restaurant.update(restaurant, {
     where: {
       id: restaurant.id,
     },
   });
-  return;
+  return updatedRest;
 };
 
 // 刪除指定id的餐廳資訊
 Restaurant.deleteRestaurant = async (id) => {
   await Restaurant.destroy({
     where: {
-      id: id,
+      id,
     },
   });
-  return;
 };
 
 module.exports = { Restaurant };

@@ -1,4 +1,5 @@
 const express = require("express");
+
 const router = express.Router();
 const {
   addRestaurant,
@@ -7,10 +8,15 @@ const {
   getRestaurant,
   updateRestaurant,
   deleteRestaurant,
+  postRestaurantImage,
 } = require("../controllers/restaurantController");
-const { authentication } = require("../utils/jwt");
 
-//取得所有餐廳
+const { authentication } = require("../utils/jwt");
+const { uploadRestImg } = require("../utils/fileUpload");
+const { errorWrapper } = require("../middlewares/errorHandler");
+const { getRestById } = require("../middlewares/restaurant");
+
+// 取得所有餐廳
 /**
  * @swagger
  * /api/restaurants:
@@ -27,9 +33,9 @@ const { authentication } = require("../utils/jwt");
  *       500:
  *         description: Internal server error
  */
-router.get("/restaurants", authentication, getAllRestaurant);
+router.get("/restaurants", authentication, errorWrapper(getAllRestaurant));
 
-//取得推薦餐廳
+// 取得推薦餐廳
 /**
  * @swagger
  * /api/recommendation:
@@ -46,9 +52,13 @@ router.get("/restaurants", authentication, getAllRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.get("/recommendation", authentication, getRecommendRestaurant);
+router.get(
+  "/recommendation",
+  authentication,
+  errorWrapper(getRecommendRestaurant),
+);
 
-//新增一筆餐廳
+// 新增一筆餐廳
 /**
  * @swagger
  * /api/restaurants:
@@ -86,12 +96,12 @@ router.get("/recommendation", authentication, getRecommendRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.post("/restaurants", authentication, addRestaurant);
+router.post("/restaurants", authentication, errorWrapper(addRestaurant));
 
-//取得指定id餐廳資訊
+// 取得指定id餐廳資訊
 /**
  * @swagger
- * /api/restaurants/:id:
+ * /api/restaurants/{id}:
  *   get:
  *     summary: Get a restaurant info from its id
  *     tags:
@@ -109,12 +119,17 @@ router.post("/restaurants", authentication, addRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.get("/restaurants/:id", authentication, getRestaurant);
+router.get(
+  "/restaurants/:id",
+  authentication,
+  getRestById,
+  errorWrapper(getRestaurant),
+);
 
-//更新指定id餐廳資訊
+// 更新指定id餐廳資訊
 /**
  * @swagger
- * /api/restaurants/:id:
+ * /api/restaurants/{id}:
  *   put:
  *     summary: Update a specified restaurant by its id.
  *     tags:
@@ -156,41 +171,21 @@ router.get("/restaurants/:id", authentication, getRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.put("/restaurants/:id", authentication, updateRestaurant);
+router.put(
+  "/restaurants/:id",
+  authentication,
+  getRestById,
+  errorWrapper(updateRestaurant),
+);
 
-//刪除指定id餐廳資訊
+// 刪除指定id餐廳資訊
 /**
  * @swagger
- * /api/restaurants/:id:
+ * /api/restaurants/{id}:
  *   delete:
  *     summary: Delete a specified restaurant by its id.
  *     tags:
  *      - Restaurant
- *     parameters:
- *      - in: body
- *        name: body
- *        description: Restaurant object (without username)
- *        schema:
- *          type: object
- *          required:
- *            - id
- *            - name
- *            - phone
- *            - address
- *            - image
- *          properties:
- *            id:
- *              type: string
- *            name:
- *              type: string
- *            phone:
- *              type: string
- *            address:
- *              type: string
- *            image:
- *              type: string
- *
- *     description: Delete a restaurant
  *     responses:
  *       200:
  *         description: Success! return the deleted restaurant name
@@ -203,6 +198,59 @@ router.put("/restaurants/:id", authentication, updateRestaurant);
  *       500:
  *         description: Internal server error
  */
-router.delete("/restaurants/:id", authentication, deleteRestaurant);
+router.delete(
+  "/restaurants/:id",
+  authentication,
+  getRestById,
+  errorWrapper(deleteRestaurant),
+);
+
+// 上傳餐廳圖片
+/**
+ * @swagger
+ * /api/restaurants/image/{id}:
+ *   post:
+ *     summary: Upload an image by restaurant id
+ *     tags:
+ *       - Restaurant
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: ID of the restaurant to upload image for
+ *         required: true
+ *         schema:
+ *           type: integer
+ *       - in: formData
+ *         name: image
+ *         type: file
+ *         description: The file to upload
+ *         required: true
+ *     description: Upload an image for a restaurant
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Image uploaded successfully
+ *         schema:
+ *           type: object
+ *           properties:
+ *             imageUrl:
+ *               type: string
+ *               description: The URL of the uploaded image
+ *       400:
+ *         description: Bad request, image not uploaded
+ *       401:
+ *         description: Unauthorized, authentication required
+ *       500:
+ *         description: Internal server error
+ */
+
+router.post(
+  "/restaurants/image/:id",
+  authentication,
+  uploadRestImg,
+  getRestById,
+  errorWrapper(postRestaurantImage),
+);
 
 module.exports = router;

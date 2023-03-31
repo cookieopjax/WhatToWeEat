@@ -90,7 +90,6 @@
 </template>
 
 <script setup>
-import { NButton, NInput } from "naive-ui";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { apiRegister } from "@/api";

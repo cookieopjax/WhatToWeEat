@@ -1,11 +1,12 @@
 const express = require("express");
+
 const router = express.Router();
 const {
   register,
   login,
   authentication,
 } = require("../controllers/userController");
-
+const { errorWrapper } = require("../middlewares/errorHandler");
 /**
  * @swagger
  * /api/register:
@@ -34,7 +35,7 @@ const {
  *       409:
  *         description: The username is already taken
  */
-router.post("/register", register);
+router.post("/register", errorWrapper(register));
 
 /**
  * @swagger
@@ -66,7 +67,7 @@ router.post("/register", register);
  *       401:
  *         description: Incorrect password.
  */
-router.post("/login", login);
+router.post("/login", errorWrapper(login));
 
 /**
  * @swagger
@@ -82,6 +83,6 @@ router.post("/login", login);
  *       401:
  *         description: Unauthorized
  */
-router.get("/authentication", authentication);
+router.get("/authentication", errorWrapper(authentication));
 
 module.exports = router;
