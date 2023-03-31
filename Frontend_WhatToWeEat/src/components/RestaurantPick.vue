@@ -4,17 +4,17 @@
   >
     <div
       class="bg-wte-blue-bg w-full flex flex-col sm:flex-row drop-shadow sm:h-full"
-      :class="{ 'h-32': !isPick }"
+      :class="{ 'h-32': !isRecommend }"
     >
       <h5
-        v-show="!isPick"
+        v-show="!isRecommend"
         class="flex items-center justify-center w-full h-full cursor-pointer"
         @click="getRecommendButton"
       >
         點擊取得今日推薦
       </h5>
       <div
-        v-show="isPick"
+        v-show="isRecommend"
         class="w-full flex flex-col sm:flex-row"
       >
         <!--給圖片的畫框-->
@@ -48,28 +48,23 @@
         class="bg-wte-primary"
         @click="getRestaurantPick"
       >
-        <n-icon>
-          <Refresh />
-        </n-icon>
+        <i-zondicons:reload />
         更換餐廳
       </n-button>
       <n-button
         type="primary"
         class="bg-wte-primary"
-        @click="isAddRestaurant = true"
+        @click="isShowAddRestModal = true"
       >
-        <n-icon>
-          <Add />
-        </n-icon>
+        <i-material-symbols:add />
         新增餐廳
       </n-button>
       <n-button
         type="primary"
         class="bg-wte-primary"
       >
-        <n-icon>
-          <pencil />
-        </n-icon>
+        <i-material-symbols:edit />
+
         編輯餐廳
       </n-button>
     </div>
@@ -85,20 +80,16 @@
         class="bg-wte-primary"
         @click="getRestaurantPick"
       >
-        <n-icon>
-          <Refresh />
-        </n-icon>
+        <i-zondicons:reload />
       </n-button>
       <n-button
         circle
         size="large"
         type="primary"
         class="bg-wte-primary"
-        @click="isAddRestaurant = true"
+        @click="isShowAddRestModal = true"
       >
-        <n-icon>
-          <Add />
-        </n-icon>
+        <i-material-symbols:add />
       </n-button>
       <n-button
         circle
@@ -106,15 +97,13 @@
         type="primary"
         class="bg-wte-primary"
       >
-        <n-icon>
-          <pencil />
-        </n-icon>
+        <i-material-symbols:edit />
       </n-button>
     </div>
 
     <!-- 新增餐廳 modal -->
     <n-modal
-      v-model:show="isAddRestaurant"
+      v-model:show="isShowAddRestModal"
       :on-after-leave="resetForm"
     >
       <n-spin
@@ -179,18 +168,14 @@
           <n-upload
             ref="imgUploadRef"
             directory-dnd
+            accept=".jpg, .jpeg, .png"
             :max="1"
             list-type="image"
-            @change="handleFileUpload"
+            :on-before-upload="handleFileUpload"
           >
             <n-upload-dragger>
-              <div style="margin-bottom: 12px">
-                <n-icon
-                  size="48"
-                  :depth="3"
-                >
-                  <archive-icon />
-                </n-icon>
+              <div class="flex items-center justify-center w-full h-14">
+                <i-material-symbols:cloud-upload class="h-10 w-10" />
               </div>
               <n-text style="font-size: 16px">
                 點擊或拖曳來上傳圖片
@@ -199,17 +184,25 @@
                 depth="3"
                 style="margin: 8px 0 0 0"
               >
-                檔案格式限制為JPG, JPEG, PNG且大小不超過5MB
+                檔案格式限制為JPG, JPEG, PNG且大小不超過3MB
               </n-p>
             </n-upload-dragger>
           </n-upload>
 
           <template #footer>
-            <div class="flex w-full">
+            <div class="flex w-full gap-3">
+              <n-button
+                type=""
+                size="large"
+                class="ml-auto"
+                @click="isShowAddRestModal = false"
+              >
+                取消
+              </n-button>
               <n-button
                 type="primary"
                 size="large"
-                class="bg-wte-primary ml-auto"
+                class="bg-wte-primary"
                 @click="handleInputValidation"
               >
                 送出
@@ -223,50 +216,23 @@
 </template>
 
 <script setup>
-import {
-  NButton,
-  NIcon,
-  NModal,
-  NCard,
-  NGrid,
-  NFormItemGi,
-  NInput,
-  NForm,
-  NUpload,
-  NUploadDragger,
-  NText,
-  NP,
-  NImage,
-  NSpin,
-} from "naive-ui";
 import { reactive, ref } from "vue";
 import { apiGetRestaurantPick, apiPostRestaurant, apiPostRestImg } from "@/api";
-import {
-  Refresh,
-  Add,
-  Pencil,
-  ArchiveOutline as ArchiveIcon,
-} from "@vicons/ionicons5";
 import { useStore } from "../store/main";
-
-import fakeBannerImg from "@/assets/bigFood.jpg";
 import { useMessage } from "naive-ui";
+import fakeBannerImg from "@/assets/bigFood.jpg";
+
 const message = useMessage();
 const store = useStore();
-
-// isPick : false:按鈕狀態 true顯示餐廳資訊
-const isPick = ref(false);
-const isAddRestaurant = ref(false);
+const isRecommend = ref(false); // isRecommend : false:按鈕狀態 true顯示餐廳資訊
 const recommendedRest = reactive({ value: [] });
+const isShowAddRestModal = ref(false);
 const restaurantForm = reactive({
   name: "",
   phone: "",
   address: "",
   image: "",
 });
-const isShowFormLoading = ref(false);
-const uploadImg = ref(new FormData());
-const formRef = ref(null);
 const restFormRules = ref({
   name: {
     required: true,
@@ -291,6 +257,9 @@ const restFormRules = ref({
     trigger: ["input", "blur"],
   },
 });
+const isShowFormLoading = ref(false);
+const uploadImg = ref(new FormData());
+const formRef = ref(null);
 const imgUploadRef = ref(null);
 
 function resetForm() {
@@ -301,12 +270,30 @@ function resetForm() {
 }
 
 function handleFileUpload(options) {
+  let format = options.file.file.type;
+  let sizeMb = options.file.file.size / 1024 / 1024;
+
+  if (
+    format != "image/png" &&
+    format != "image/jpg" &&
+    format != "image/jpeg"
+  ) {
+    message.warning("圖片格式錯誤，僅支持JPG, JPEG, PNG");
+    imgUploadRef.value.clear();
+    return false;
+  }
+
+  if (sizeMb > 3) {
+    message.warning("圖片大小過大，請保持在3MB以下");
+    imgUploadRef.value.clear();
+    return false;
+  }
   uploadImg.value.append("restImg", options.file.file);
 }
 
 function getRecommendButton() {
   getRestaurantPick();
-  isPick.value = true;
+  isRecommend.value = true;
 }
 
 const getRestaurantPick = async () => {
@@ -324,14 +311,14 @@ const postRestaurant = async () => {
     const res = await apiPostRestaurant(restaurantForm);
     const imgRes = await apiPostRestImg(uploadImg.value, res.data.id);
     store.getRestaurantData();
-    isAddRestaurant.value = false;
+    isShowAddRestModal.value = false;
     isShowFormLoading.value = false;
     resetForm();
     message.success("餐廳新增成功");
   } catch (err) {
-    isAddRestaurant.value = false;
+    isShowAddRestModal.value = false;
     isShowFormLoading.value = false;
-    message.success("餐廳新增失敗");
+    message.error("餐廳新增失敗");
     console.error(err);
   }
 };
@@ -341,8 +328,6 @@ const handleInputValidation = async (e) => {
   formRef.value?.validate((errors) => {
     if (!errors) {
       postRestaurant();
-    } else {
-      console.err(errors);
     }
   });
 };

@@ -56,7 +56,6 @@
 
 <script setup>
 import { onBeforeMount } from "vue";
-import { NGrid, NGi, NButton, NImage } from "naive-ui";
 import { useStore } from "../store/main";
 import fakeImg from "@/assets/foodEmpty.jpg";
 

@@ -1,6 +1,5 @@
 <script setup>
 import LoadingPage from "./pages/LoadingPage.vue";
-import { NMessageProvider } from "naive-ui";
 import { useStore } from "./store/main";
 const store = useStore();
 </script>
