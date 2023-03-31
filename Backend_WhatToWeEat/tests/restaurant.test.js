@@ -15,6 +15,8 @@ beforeAll(async () => {
 
 describe("Test the restaurant", () => {
   let testRestId;
+  let createTestRestId;
+
   beforeEach(async () => {
     // 測試用例開始前，先創建一個餐廳，並取得其生成的 ID
     const response = await request(app)
@@ -29,16 +31,13 @@ describe("Test the restaurant", () => {
   });
 
   afterEach(async () => {
-    // 測試用例開始前，先創建一個餐廳，並取得其生成的 ID
-    const response = await request(app)
-      .delete(`/api/restaurants/${testRestId}`)
-      .set("Authorization", `Bearer ${token}`);
-  });
-
-  afterEach(async () => {
     // 測試用例結束後，清理資料庫，刪除先前創建的餐廳
     await request(app)
       .delete(`/api/restaurants/${testRestId}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    await request(app)
+      .delete(`/api/restaurants/${createTestRestId}`)
       .set("Authorization", `Bearer ${token}`);
   });
 
@@ -56,14 +55,15 @@ describe("Test the restaurant", () => {
     request(app)
       .post("/api/restaurants")
       .send({
-        name: "real test rest",
+        name: "325TestRest",
         phone: "09090909093",
         address: "台灣Taiwan3",
       })
       .set("Authorization", `Bearer ${token}`)
       .then((response) => {
         expect(response.statusCode).toBe(200);
-        expect(response.body).toHaveProperty("name", "real test rest");
+        createTestRestId = response.body.id;
+        expect(response.body).toHaveProperty("name", "325TestRest");
         done();
       });
   });
