@@ -18,19 +18,18 @@
         class="w-full flex flex-col sm:flex-row"
       >
         <!--給圖片的畫框-->
-        <div class="w-full h-[50vw] sm:w-64 sm:h-36 bg-wte-warning">
-          <n-image
+        <div class="w-full h-[50vw] sm:w-64 sm:h-36 bg-wte-bg">
+          <img
             v-if="recommendedRest.value.image"
-            object-fit="cover"
+            class="h-full w-full object-cover"
             :src="recommendedRest.value.image"
-            lazy="true"
-          />
-          <n-image
+          >
+          <img
             v-else
-            object-fit="cover"
+            class="h-full w-full object-cover"
             :src="fakeBannerImg"
             lazy="true"
-          />
+          >
         </div>
 
         <div class="p-4 flex flex-col justify-center">

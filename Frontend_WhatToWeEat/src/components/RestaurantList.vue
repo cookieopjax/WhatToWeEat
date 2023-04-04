@@ -6,24 +6,33 @@
     responsive="screen"
   >
     <n-gi
-      v-for="(item, index) in store.restaurantList"
+      v-for="(item, index) in restData"
       :key="item.id"
     >
       <div class="border flex">
-        <n-image
-          v-if="item.image"
-          :src="item.image"
-          object-fit="cover"
+        <div
+          ref="imgContainerRef"
           class="h-28 w-28 flex-shrink-0"
-          lazy="true"
-        />
-        <n-image
-          v-else
-          object-fit="cover"
-          :src="fakeImg"
-          class="h-28 w-28 flex-shrink-0"
-          lazy="true"
-        />
+        >
+          <n-image
+            v-if="item.image"
+            :src="item.image"
+            :height="imgContainer.height"
+            :width="imgContainer.width"
+            class="h-28 w-28 flex-shrink-0"
+            object-fit="cover"
+            lazy="true"
+          />
+          <n-image
+            v-else
+            :height="imgContainer.height"
+            :width="imgContainer.width"
+            object-fit="cover"
+            :src="fakeImg"
+            lazy="true"
+          />
+        </div>
+
         <div
           class="flex flex-col h-28 p-2 cursor-pointer w-full"
           style="min-width: 0px"
@@ -57,7 +66,7 @@
   </n-grid>
   <RestaurantModal
     mode="view"
-    :init-data="store.restaurantList[selectedIndex]"
+    :init-data="restData[selectedIndex]"
     :is-show-rest-modal="isShowRestModal"
     :is-show-loading="isShowFormLoading"
     @close="isShowRestModal = false"
@@ -72,7 +81,7 @@ import {
   apiPostRestImg,
   apiDeleteRestaurant,
 } from "@/api";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, onMounted, reactive, computed } from "vue";
 import { useStore } from "../store/main";
 import { useMessage } from "naive-ui";
 import fakeImg from "@/assets/foodEmpty.jpg";
@@ -82,6 +91,8 @@ const store = useStore();
 const isShowRestModal = ref(false);
 const isShowFormLoading = ref(false);
 const selectedIndex = ref(0);
+const imgContainerRef = ref([]);
+const imgContainer = reactive({ width: "0", height: "0" });
 
 const updateRestaurant = async (data) => {
   try {
@@ -121,6 +132,30 @@ const deleteRestaurant = async (data) => {
 
 onBeforeMount(() => {
   store.getRestaurantData();
+});
+
+onMounted(() => {
+  imgContainer.height = imgContainerRef.value[0].clientHeight;
+  imgContainer.width = imgContainerRef.value[0].clientWidth;
+});
+
+const restData = computed(() => {
+  if (!store.restaurantList.length) {
+    return [
+      {
+        id: 0,
+        username: "",
+        name: "",
+        phone: "",
+        address: "",
+        image: "",
+        createdAt: "",
+        updatedAt: "",
+      },
+    ];
+  }
+
+  return store.restaurantList;
 });
 </script>
 <style scoped>
