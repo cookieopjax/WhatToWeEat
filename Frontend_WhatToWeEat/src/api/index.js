@@ -16,6 +16,10 @@ export const apiLogin = (data) => instance.post("/login", data);
 export const apiAuthentication = () => instance.get("/authentication");
 export const apiGetAllRestaurant = () => instance.get("/restaurants");
 export const apiPostRestaurant = (data) => instance.post("/restaurants", data);
+export const apiUpdateRestaurant = (data, id) =>
+  instance.put(`/restaurants/${id}`, data);
+export const apiDeleteRestaurant = (id) =>
+  instance.delete(`/restaurants/${id}`);
 export const apiGetRestaurantPick = () => instance.get("/recommendation");
 export const apiPostRestImg = (data, id) =>
   instance.post(`/restaurants/image/${id}`, data);
