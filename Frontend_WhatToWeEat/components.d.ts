@@ -9,10 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ICarbonAccessibility: typeof import('~icons/carbon/accessibility')['default']
-    IconFxemojiBanana: typeof import('~icons/fxemoji/banana')['default']
-    'IconMaterialSymbols:10k': typeof import('~icons/material-symbols/10k')['default']
-    'IMaterialSymbols:10k': typeof import('~icons/material-symbols/10k')['default']
+    ImageUpload: typeof import('./src/components/ImageUpload.vue')['default']
     'IMaterialSymbols:add': typeof import('~icons/material-symbols/add')['default']
     'IMaterialSymbols:cloudUpload': typeof import('~icons/material-symbols/cloud-upload')['default']
     'IMaterialSymbols:edit': typeof import('~icons/material-symbols/edit')['default']
@@ -24,7 +21,6 @@ declare module '@vue/runtime-core' {
     NFormItemGi: typeof import('naive-ui')['NFormItemGi']
     NGi: typeof import('naive-ui')['NGi']
     NGrid: typeof import('naive-ui')['NGrid']
-    NIcon: typeof import('naive-ui')['NIcon']
     NImage: typeof import('naive-ui')['NImage']
     NInput: typeof import('naive-ui')['NInput']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
@@ -36,6 +32,7 @@ declare module '@vue/runtime-core' {
     NUpload: typeof import('naive-ui')['NUpload']
     NUploadDragger: typeof import('naive-ui')['NUploadDragger']
     RestaurantList: typeof import('./src/components/RestaurantList.vue')['default']
+    RestaurantModal: typeof import('./src/components/RestaurantModal.vue')['default']
     RestaurantPick: typeof import('./src/components/RestaurantPick.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
