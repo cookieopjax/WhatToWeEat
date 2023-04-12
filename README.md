@@ -6,6 +6,8 @@
 
 https://what-to-we-eat.vercel.app/
 
+因後端伺服器採用免費方案，第一次啟動需要些許開機時間
+
 | ![](https://i.imgur.com/4Xgk7Gj.png)| ![](https://i.imgur.com/sPCBWHA.png)| ![](https://i.imgur.com/iPtHQ42.png)|
 | -------- | -------- | -------- |
 
